@@ -1,0 +1,462 @@
+<!DOCTYPE html><html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nili Exchange | Premium Money Transfer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Vazirmatn', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #050816;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(0,255,200,0.18), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(0,150,255,0.18), transparent 25%),
+        radial-gradient(circle at center, rgba(140,0,255,0.12), transparent 35%);
+      z-index: -1;
+    }
+
+    nav {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 7%;
+      backdrop-filter: blur(18px);
+      background: rgba(0,0,0,0.25);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      z-index: 999;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: #00ffd5;
+      text-shadow: 0 0 18px rgba(0,255,213,0.6);
+    }
+
+    .menu {
+      display: flex;
+      gap: 25px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: white;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      color: #00ffd5;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 8% 60px;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      animation: fadeUp 1.3s ease;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(0,255,213,0.12);
+      color: #00ffd5;
+      padding: 10px 18px;
+      border-radius: 50px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(0,255,213,0.3);
+      box-shadow: 0 0 18px rgba(0,255,213,0.12);
+    }
+
+    .hero h1 {
+      font-size: 72px;
+      line-height: 1.2;
+      margin-bottom: 25px;
+      font-weight: 900;
+    }
+
+    .hero h1 span {
+      color: #00ffd5;
+      text-shadow: 0 0 25px rgba(0,255,213,0.8);
+    }
+
+    .hero p {
+      font-size: 22px;
+      color: rgba(255,255,255,0.78);
+      line-height: 2;
+      margin-bottom: 35px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: 0.35s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00ffd5, #00a2ff);
+      color: #04111f;
+      box-shadow: 0 0 28px rgba(0,255,213,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .floating-card {
+      position: absolute;
+      padding: 16px 22px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 0 25px rgba(0,0,0,0.25);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .card1 {
+      top: 22%;
+      right: 8%;
+    }
+
+    .card2 {
+      bottom: 18%;
+      left: 10%;
+      animation-delay: 1s;
+    }
+
+    .card3 {
+      top: 60%;
+      right: 18%;
+      animation-delay: 2s;
+    }
+
+    section {
+      padding: 100px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: rgba(255,255,255,0.65);
+      font-size: 18px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 28px;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 35px;
+      border-radius: 28px;
+      transition: 0.4s;
+      backdrop-filter: blur(16px);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 40px rgba(0,255,213,0.18);
+    }
+
+    .feature-card h3 {
+      margin: 20px 0 12px;
+      font-size: 24px;
+    }
+
+    .feature-card p {
+      color: rgba(255,255,255,0.72);
+      line-height: 1.9;
+    }
+
+    .branches {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+    }
+
+    .branch {
+      padding: 28px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: 0.35s;
+    }
+
+    .branch:hover {
+      transform: scale(1.04);
+      border-color: rgba(0,255,213,0.5);
+    }
+
+    .branch h3 {
+      color: #00ffd5;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .branch p {
+      color: rgba(255,255,255,0.72);
+      line-height: 1.8;
+    }
+
+    footer {
+      padding: 40px 8%;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.03);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-18px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    @media(max-width: 768px) {
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .menu {
+        display: none;
+      }
+
+      .floating-card {
+        display: none;
+      }
+
+      .section-title h2 {
+        font-size: 34px;
+      }
+    }
+  </style></head>
+<body><audio autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8d40a6f53.mp3?filename=future-bass-logo-108997.mp3" type="audio/mpeg">
+</audio>  <nav>
+    <div class="logo">💎 NILI EXCHANGE</div><div class="menu">
+  <a href="#home">خانه</a>
+  <a href="#services">خدمات</a>
+  <a href="#branches">نمایندگی‌ها</a>
+  <a href="#contact">تماس</a>
+</div>
+
+  </nav>  <section class="hero" id="home"><div class="floating-card card1">💸 حواله سریع بین‌المللی</div>
+<div class="floating-card card2">🔒 امنیت کامل تراکنش‌ها</div>
+<div class="floating-card card3">⚡ انتقال فوری پول</div>
+
+<div class="hero-content">
+  <div class="badge">صرافی مدرن و حرفه‌ای برای انتقال پول</div>
+
+  <h1>
+    آینده حواله پول با <span>صرافی نیلی</span>
+  </h1>
+
+  <p>
+    انتقال سریع و امن پول بین افغانستان، ایران، ترکیه، امارات و سایر کشورها با طراحی مدرن و خدمات VIP
+    با پشتیبانی حرفه‌ای، نرخ رقابتی و خدمات 24 ساعته.
+  </p>
+
+  <div class="buttons">
+    <a href="#branches" class="btn btn-primary">مشاهده نمایندگی‌ها</a>
+    <a href="#services" class="btn btn-secondary">خدمات ما</a>
+  </div>
+</div>
+
+  </section>  <section id="services">
+    <div class="section-title">
+      <h2>خدمات ویژه صرافی نیلی</h2>
+      <p>سریع، مطمئن و حرفه‌ای برای مشتریان بین‌المللی</p>
+    </div><div class="features">
+  <div class="feature-card">
+    <h3>📲 واتساپ مستقیم</h3>
+    <p>
+      ارتباط فوری با پشتیبانی و ثبت حواله در واتساپ.
+    </p>
+  </div>
+  <div class="feature-card">
+    <h3>⚡ انتقال فوری</h3>
+    <p>
+      ارسال و دریافت پول در کوتاه‌ترین زمان ممکن با امنیت کامل.
+    </p>
+  </div>
+
+  <div class="feature-card">
+    <h3>🔒 امنیت بالا</h3>
+    <p>
+      تمامی تراکنش‌ها با سیستم‌های امن و قابل اعتماد انجام می‌شود.
+    </p>
+  </div>
+
+  <div class="feature-card">
+    <h3>🌍 پوشش بین‌المللی</h3>
+    <p>
+      خدمات حواله به افغانستان، ایران، ترکیه و کشورهای مختلف.
+    </p>
+  </div>
+
+  <div class="feature-card">
+    <h3>💱 نرخ رقابتی</h3>
+    <p>
+      بهترین نرخ تبدیل ارز با کارمزد مناسب و شفاف.
+    </p>
+  </div>
+</div>
+
+  </section>  <section id="branches">
+    <div class="section-title">
+      <h2>نمایندگی‌های اجرا حواله</h2>
+      <p>پوشش گسترده در افغانستان و کشورهای منطقه</p>
+    </div><div class="branches">
+  <div class="branch">
+    <h3>📍 هرات</h3>
+    <p>خدمات انتقال وجه و اجرای حواله با سرعت بالا.</p>
+  </div>
+
+  <div class="branch">
+    <h3>📍 استانبول</h3>
+    <p>حواله سریع بین ترکیه و افغانستان با پشتیبانی کامل.</p>
+  </div>
+
+  <div class="branch">
+    <h3>📍 تهران</h3>
+    <p>تبدیل ارز و ارسال پول با نرخ رقابتی.</p>
+  </div>
+
+  <div class="branch">
+    <h3>📍 کابل</h3>
+    <p>اجرای سریع حواله و خدمات تبدیل ارز در مرکز افغانستان.</p>
+  </div>
+
+  <div class="branch">
+    <h3>📍 دایکندی</h3>
+    <p>پشتیبانی کامل حواله‌های داخلی و بین‌المللی.</p>
+  </div>
+
+  <div class="branch">
+    <h3>📍 قندهار</h3>
+    <p>انتقال امن پول با سرعت بالا و نرخ مناسب.</p>
+  </div>
+
+  <div class="branch">
+    <h3>📍 غزنی</h3>
+    <p>خدمات مالی و انتقال وجه برای مشتریان محلی.</p>
+  </div>
+
+  <div class="branch">
+    <h3>📍 مزار شریف</h3>
+    <p>پوشش گسترده برای ارسال و دریافت حواله.</p>
+  </div>
+
+  <div class="branch">
+    <h3>📍 ایران</h3>
+    <p>انتقال پول بین ایران و افغانستان با پشتیبانی حرفه‌ای.</p>
+  </div>
+
+  <div class="branch">
+    <h3>📍 ترکیه</h3>
+    <p>خدمات حواله سریع برای مشتریان مقیم ترکیه.</p>
+  </div>
+
+</div>
+
+  </section>  <section id="contact">
+    <div class="section-title">
+      <h2>ارتباط با صرافی نیلی</h2>
+      <p>برای اطلاعات بیشتر و انجام حواله با ما در تماس باشید</p>
+    </div><div style="max-width:700px;margin:auto;background:rgba(255,255,255,0.05);padding:40px;border-radius:28px;border:1px solid rgba(255,255,255,0.08);text-align:center;backdrop-filter:blur(14px)">
+  <h3 style="font-size:32px;margin-bottom:18px;color:#00ffd5">Nili Exchange</h3>
+  <p style="line-height:2;color:rgba(255,255,255,0.75)">
+    حواله سریع • امنیت بالا • پشتیبانی حرفه‌ای
+  </p>
+
+  <div style="margin-top:30px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap">
+    <a href="#home" class="btn btn-primary">بازگشت به بالا</a>
+    <a href="https://wa.me/93700000000" class="btn btn-secondary">واتساپ مستقیم</a>
+  </div>
+</div>
+
+  </section>  <footer>
+    © 2026 Nili Exchange — طراحی مدرن و حرفه‌ای برای خدمات مالی بین‌المللی.
+  </footer></body>
+</html>
