@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صرافی نیلی | Nili Exchange</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--gold:#C9A84C;
+--gold-light:#E8C97A;
+--gold-dark:#8B6914;
+--navy:#0A1628;
+--navy-mid:#1A2E4A;
+--navy-light:#243B5C;
+--white:#FFFFFF;
+--off-white:#F8F5EE;
+--text-muted:#A0A8B8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Vazirmatn',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden}
+
+nav{
+position:fixed;top:0;width:100%;z-index:100;
+background:rgba(10,22,40,0.92);backdrop-filter:blur(12px);
+border-bottom:1px solid rgba(201,168,76,0.2);
+padding:0 2rem;
+display:flex;align-items:center;justify-content:space-between;height:70px;
+}
+.logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold);letter-spacing:1px}
+.logo span{color:var(--white);font-size:0.75rem;display:block;font-family:'Vazirmatn',sans-serif;font-weight:300;letter-spacing:2px;text-transform:uppercase}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:0.9rem;transition:color 0.3s}
+.nav-links a:hover{color:var(--gold)}
+
+.hero{
+min-height:100vh;display:flex;align-items:center;justify-content:center;
+background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy) 100%);
+position:relative;overflow:hidden;text-align:center;padding:6rem 2rem 4rem;
+}
+.hero-bg{
+position:absolute;inset:0;
+background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(201,168,76,0.08) 0%,transparent 70%);
+}
+.coins{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.coin{
+position:absolute;width:60px;height:60px;border-radius:50%;
+border:2px solid rgba(201,168,76,0.2);
+display:flex;align-items:center;justify-content:center;
+font-size:1.2rem;color:rgba(201,168,76,0.3);
+animation:float linear infinite;
+}
+@keyframes float{
+0%{transform:translateY(110vh) rotate(0deg);opacity:0}
+10%{opacity:1}
+90%{opacity:1}
+100%{transform:translateY(-10vh) rotate(720deg);opacity:0}
+}
+.hero-content{position:relative;z-index:1;max-width:750px}
+.hero-badge{
+display:inline-block;
+background:rgba(201,168,76,0.12);
+border:1px solid rgba(201,168,76,0.35);
+color:var(--gold-light);
+padding:6px 20px;border-radius:50px;
+font-size:0.8rem;letter-spacing:2px;margin-bottom:2rem;
+animation:fadeDown 0.8s ease both;
+}
+.hero h1{
+font-family:'Playfair Display',serif;
+font-size:clamp(2.2rem,6vw,4rem);
+line-height:1.2;
+margin-bottom:1rem;
+animation:fadeDown 0.8s 0.2s ease both;
+}
+.hero h1 span{color:var(--gold)}
+.hero p{
+color:var(--text-muted);font-size:1.05rem;line-height:1.9;
+max-width:600px;margin:0 auto 2.5rem;
+animation:fadeDown 0.8s 0.4s ease both;
+}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeDown 0.8s 0.6s ease both}
+.btn-gold{
+background:var(--gold);color:var(--navy);
+padding:14px 32px;border-radius:8px;
+text-decoration:none;font-weight:700;font-size:0.95rem;
+transition:all 0.3s;border:none;cursor:pointer;
+}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,0.3)}
+.btn-outline{
+background:transparent;color:var(--gold);
+padding:14px 32px;border-radius:8px;
+text-decoration:none;font-weight:500;font-size:0.95rem;
+border:1.5px solid rgba(201,168,76,0.5);
+transition:all 0.3s;cursor:pointer;
+}
+.btn-outline:hover{background:rgba(201,168,76,0.08);transform:translateY(-2px)}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+
+.ticker{
+background:var(--navy-mid);
+border-top:1px solid rgba(201,168,76,0.15);
+border-bottom:1px solid rgba(201,168,76,0.15);
+padding:12px 0;overflow:hidden;
+}
+.ticker-inner{display:flex;animation:ticker 30s linear infinite;white-space:nowrap}
+.ticker-item{
+display:inline-flex;align-items:center;gap:8px;
+padding:0 2.5rem;font-size:0.85rem;color:var(--text-muted);
+border-right:1px solid rgba(201,168,76,0.1);
+}
+.ticker-item .cur{color:var(--gold);font-weight:500}
+.ticker-item .up{color:#4CAF7A}
+.ticker-item .dn{color:#E05050}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+section{padding:5rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.section-title{
+text-align:center;margin-bottom:3.5rem;
+}
+.section-title h2{
+font-family:'Playfair Display',serif;
+font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:0.75rem;
+}
+.section-title h2 span{color:var(--gold)}
+.section-title p{color:var(--text-muted);max-width:550px;margin:0 auto;line-height:1.8}
+.divider{
+width:60px;height:3px;
+background:linear-gradient(to right,var(--gold-dark),var(--gold),var(--gold-dark));
+margin:0 auto 1.5rem;border-radius:2px;
+}
+
+.services{background:var(--navy)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+.service-card{
+background:var(--navy-mid);
+border:1px solid rgba(201,168,76,0.12);
+border-radius:12px;padding:2rem;
+transition:all 0.35s;position:relative;overflow:hidden;
+}
+.service-card::before{
+content:'';position:absolute;top:0;right:0;
+width:3px;height:0;background:var(--gold);
+transition:height 0.35s;border-radius:0 12px 0 0;
+}
+.service-card:hover::before{height:100%}
+.service-card:hover{transform:translateY(-5px);border-color:rgba(201,168,76,0.3);box-shadow:0 15px 40px rgba(0,0,0,0.3)}
+.service-icon{
+width:52px;height:52px;border-radius:10px;
+background:rgba(201,168,76,0.1);
+display:flex;align-items:center;justify-content:center;
+margin-bottom:1.2rem;font-size:1.5rem;
+}
+.service-card h3{font-size:1.05rem;margin-bottom:0.6rem;font-weight:500}
+.service-card p{color:var(--text-muted);font-size:0.88rem;line-height:1.8}
+
+.branches{background:var(--navy-mid)}
+.branches-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.branch-card{
+background:var(--navy);
+border:1px solid rgba(201,168,76,0.15);
+border-radius:12px;padding:2rem;
+}
+.branch-badge{
+display:inline-block;
+background:rgba(201,168,76,0.12);
+color:var(--gold);
+font-size:0.75rem;padding:4px 14px;border-radius:50px;
+margin-bottom:1rem;letter-spacing:1px;
+}
+.branch-card h3{font-size:1.2rem;margin-bottom:1rem;font-weight:500}
+.branch-info{display:flex;flex-direction:column;gap:0.6rem}
+.branch-info span{
+display:flex;align-items:center;gap:8px;
+color:var(--text-muted);font-size:0.88rem;
+}
+.branch-info .dot{
+width:6px;height:6px;border-radius:50%;
+background:var(--gold);flex-shrink:0;
+}
+
+.reps{background:var(--navy)}
+.reps-title{color:var(--text-muted);font-size:0.9rem;text-align:center;margin-bottom:2rem}
+.reps-grid{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.rep-item{
+background:var(--navy-mid);
+border:1px solid rgba(201,168,76,0.12);
+border-radius:8px;padding:10px 22px;
+font-size:0.9rem;color:var(--gold-light);
+transition:all 0.3s;
+}
+.rep-item:hover{background:rgba(201,168,76,0.08);border-color:rgba(201,168,76,0.3)}
+
+.trust{background:var(--navy-mid)}
+.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem}
+.trust-item{text-align:center;padding:1.5rem}
+.trust-num{
+font-family:'Playfair Display',serif;
+font-size:2.5rem;color:var(--gold);font-weight:600;
+}
+.trust-label{color:var(--text-muted);font-size:0.88rem;margin-top:0.4rem}
+
+.contact-section{background:var(--navy)}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:3rem}
+.contact-card{
+background:var(--navy-mid);
+border:1px solid rgba(201,168,76,0.12);
+border-radius:12px;padding:1.5rem 2rem;
+display:flex;align-items:center;gap:1.2rem;
+transition:all 0.3s;text-decoration:none;
+}
+.contact-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-3px)}
+.contact-icon{
+width:46px;height:46px;border-radius:10px;
+display:flex;align-items:center;justify-content:center;
+font-size:1.3rem;flex-shrink:0;
+}
+.contact-card .c-label{color:var(--text-muted);font-size:0.78rem;margin-bottom:3px}
+.contact-card .c-value{color:var(--white);font-size:0.92rem;font-weight:500}
+
+.social-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+.social-btn{
+display:flex;align-items:center;gap:8px;
+background:var(--navy-mid);
+border:1px solid rgba(201,168,76,0.15);
+border-radius:8px;padding:10px 20px;
+color:var(--text-muted);font-size:0.88rem;
+text-decoration:none;transition:all 0.3s;
+}
+.social-btn:hover{color:var(--gold);border-color:rgba(201,168,76,0.4)}
+.social-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);opacity:0.5}
+
+footer{
+background:var(--navy-mid);
+border-top:1px solid rgba(201,168,76,0.12);
+padding:2rem;text-align:center;
+color:var(--text-muted);font-size:0.82rem;line-height:1.9;
+}
+footer span{color:var(--gold)}
+
+.scroll-reveal{opacity:0;transform:translateY(30px);transition:all 0.7s ease}
+.scroll-reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    صرافی نیلی
+    <span>NILI EXCHANGE</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">خدمات</a></li>
+    <li><a href="#branches">شعبات</a></li>
+    <li><a href="#contact">تماس</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="coins" id="coins"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ مورد اعتماد هزاران مشتری ✦</div>
+    <h1>امنیت مالی شما<br><span>سرمایه ماست</span></h1>
+    <p>صرافی نیلی با سال‌ها تجربه در خدمات ارزی و حواله‌جات، پل اطمینان میان افغانستان و ایران — سرعت، صداقت و شفافیت در هر تراکنش.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-gold">تماس با ما</a>
+      <a href="#services" class="btn-outline">خدمات ما</a>
+    </div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner" id="ticker">
+    <div class="ticker-item"><span class="cur">دلار آمریکا</span><span class="up">↑ ۷۲,۵۰۰ تومان</span></div>
+    <div class="ticker-item"><span class="cur">یورو</span><span class="up">↑ ۷۸,۲۰۰ تومان</span></div>
+    <div class="ticker-item"><span class="cur">درهم امارات</span><span class="dn">↓ ۱۹,۷۰۰ تومان</span></div>
+    <div class="ticker-item"><span class="cur">پوند انگلیس</span><span class="up">↑ ۹۱,۰۰۰ تومان</span></div>
+    <div class="ticker-item"><span class="cur">افغانی</span><span class="up">↑ ۱,۰۵۰ تومان</span></div>
+    <div class="ticker-item"><span class="cur">ریال سعودی</span><span class="dn">↓ ۱۹,۳۰۰ تومان</span></div>
+    <div class="ticker-item"><span class="cur">دلار آمریکا</span><span class="up">↑ ۷۲,۵۰۰ تومان</span></div>
+    <div class="ticker-item"><span class="cur">یورو</span><span class="up">↑ ۷۸,۲۰۰ تومان</span></div>
+    <div class="ticker-item"><span class="cur">درهم امارات</span><span class="dn">↓ ۱۹,۷۰۰ تومان</span></div>
+    <div class="ticker-item"><span class="cur">پوند انگلیس</span><span class="up">↑ ۹۱,۰۰۰ تومان</span></div>
+    <div class="ticker-item"><span class="cur">افغانی</span><span class="up">↑ ۱,۰۵۰ تومان</span></div>
+    <div class="ticker-item"><span class="cur">ریال سعودی</span><span class="dn">↓ ۱۹,۳۰۰ تومان</span></div>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-title scroll-reveal">
+      <div class="divider"></div>
+      <h2>خدمات <span>صرافی نیلی</span></h2>
+      <p>ارائه کامل‌ترین خدمات ارزی با بالاترین استانداردهای حرفه‌ای</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card scroll-reveal">
+        <div class="service-icon">💱</div>
+        <h3>خرید و فروش ارز</h3>
+        <p>معامله دلار، یورو، درهم، پوند و تمام ارزهای اصلی جهان با بهترین نرخ روز بازار</p>
+      </div>
+      <div class="service-card scroll-reveal">
+        <div class="service-icon">🏦</div>
+        <h3>حواله داخلی افغانستان</h3>
+        <p>انتقال وجه سریع به تمام ولایات افغانستان — از دایکندی تا کابل، هرات، قندهار و مزار شریف</p>
+      </div>
+      <div class="service-card scroll-reveal">
+        <div class="service-icon">🌐</div>
+        <h3>حواله بین‌المللی</h3>
+        <p>ارسال و دریافت حواله به کشورهای مختلف جهان با کمترین کارمزد و بیشترین سرعت</p>
+      </div>
+      <div class="service-card scroll-reveal">
+        <div class="service-icon">🔒</div>
+        <h3>امنیت تراکنش</h3>
+        <p>تمامی تبادلات مالی با بالاترین سطح امنیت و شفافیت کامل انجام می‌گردد</p>
+      </div>
+      <div class="service-card scroll-reveal">
+        <div class="service-icon">📊</div>
+        <h3>نرخ رقابتی</h3>
+        <p>بهترین نرخ‌های ارزی به‌روز شده لحظه‌ای — بدون هزینه‌های پنهان</p>
+      </div>
+      <div class="service-card scroll-reveal">
+        <div class="service-icon">⚡</div>
+        <h3>انتقال فوری</h3>
+        <p>خدمات حواله اضطراری با پردازش در کمتر از چند ساعت برای نیازهای فوری شما</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="branches" id="branches">
+  <div class="container">
+    <div class="section-title scroll-reveal">
+      <div class="divider"></div>
+      <h2>شعبات <span>اصلی</span></h2>
+      <p>حضور در دو کشور برای خدمت‌رسانی بهتر به شما</p>
+    </div>
+    <div class="branches-grid">
+      <div class="branch-card scroll-reveal">
+        <div class="branch-badge">🇦🇫 افغانستان</div>
+        <h3>شعبه دایکندی — شهر نیلی</h3>
+        <div class="branch-info">
+          <span><span class="dot"></span>ولایت دایکندی، مرکز شهر نیلی</span>
+          <span><span class="dot"></span>شعبه مرکزی و اصلی صرافی نیلی</span>
+          <span><span class="dot"></span>تمام روزهای هفته فعال</span>
+        </div>
+      </div>
+      <div class="branch-card scroll-reveal">
+        <div class="branch-badge">🇮🇷 ایران</div>
+        <h3>شعبه تهران</h3>
+        <div class="branch-info">
+          <span><span class="dot"></span>تهران — ایران</span>
+          <span><span class="dot"></span>خدمات کامل ارزی و حواله</span>
+          <span><span class="dot"></span>پاسخگوی جامعه افغانستانی مقیم ایران</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reps scroll-reveal" style="margin-top:3rem">
+      <div class="section-title">
+        <div class="divider"></div>
+        <h2>نمایندگی‌های <span>حواله</span></h2>
+      </div>
+      <p class="reps-title">شبکه گسترده نمایندگی در سراسر افغانستان</p>
+      <div class="reps-grid">
+        <div class="rep-item">📍 دایکندی</div>
+        <div class="rep-item">📍 کابل</div>
+        <div class="rep-item">📍 هرات</div>
+        <div class="rep-item">📍 قندهار</div>
+        <div class="rep-item">📍 غزنی</div>
+        <div class="rep-item">📍 مزار شریف</div>
+        <div class="rep-item">📍 بامیان</div>
+        <div class="rep-item">📍 جلال‌آباد</div>
+        <div class="rep-item">📍 و سایر ولایات</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item scroll-reveal">
+        <div class="trust-num">+۱۰</div>
+        <div class="trust-label">سال تجربه در خدمات ارزی</div>
+      </div>
+      <div class="trust-item scroll-reveal">
+        <div class="trust-num">+۵۰۰۰</div>
+        <div class="trust-label">مشتری راضی</div>
+      </div>
+      <div class="trust-item scroll-reveal">
+        <div class="trust-num">۲۴/۷</div>
+        <div class="trust-label">پشتیبانی آنلاین</div>
+      </div>
+      <div class="trust-item scroll-reveal">
+        <div class="trust-num">+۹</div>
+        <div class="trust-label">نمایندگی فعال در افغانستان</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-title scroll-reveal">
+      <div class="divider"></div>
+      <h2>ارتباط با <span>ما</span></h2>
+      <p>در تمام پیام‌رسان‌ها در دسترس شما هستیم</p>
+    </div>
+
+    <div class="contact-grid">
+      <a href="https://t.me/ghulamsakhi_jawadi" class="contact-card scroll-reveal" target="_blank">
+        <div class="contact-icon" style="background:rgba(41,182,246,0.1);font-size:1.5rem">✈️</div>
+        <div>
+          <div class="c-label">تلگرام</div>
+          <div class="c-value">@ghulamsakhi_jawadi</div>
+        </div>
+      </a>
+      <a href="https://wa.me/989363344213" class="contact-card scroll-reveal" target="_blank">
+        <div class="contact-icon" style="background:rgba(76,175,122,0.1);font-size:1.5rem">💬</div>
+        <div>
+          <div class="c-label">واتساپ</div>
+          <div class="c-value">09363344213</div>
+        </div>
+      </a>
+      <div class="contact-card scroll-reveal">
+        <div class="contact-icon" style="background:rgba(201,168,76,0.1);font-size:1.5rem">📱</div>
+        <div>
+          <div class="c-label">ایمو / تماس مستقیم</div>
+          <div class="c-value">09363344213</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title scroll-reveal" style="margin-top:3rem;margin-bottom:1.5rem">
+      <h2 style="font-size:1.4rem">شبکه‌های <span>اجتماعی</span></h2>
+    </div>
+    <div class="social-row scroll-reveal">
+      <a href="https://facebook.com/ghulamsakhi.jawadi" class="social-btn" target="_blank">
+        <span class="social-dot"></span> فیسبوک
+      </a>
+      <a href="https://instagram.com/ghulamsakhi_jawadi" class="social-btn" target="_blank">
+        <span class="social-dot"></span> اینستاگرام
+      </a>
+      <a href="https://x.com/ghulamsakhi_jawadi" class="social-btn" target="_blank">
+        <span class="social-dot"></span> X (توییتر)
+      </a>
+    </div>
+    <p style="text-align:center;color:var(--text-muted);font-size:0.82rem;margin-top:1rem">
+      در تمام پلتفرم‌ها با نام: <span style="color:var(--gold)">ghulamsakhi jawadi</span>
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>© ۱۴۰۳ — <span>صرافی نیلی | Nili Exchange</span></p>
+  <p style="margin-top:6px">دایکندی، افغانستان &nbsp;|&nbsp; تهران، ایران &nbsp;|&nbsp; ۰۹۳۶۳۳۴۴۲۱۳</p>
+  <p style="margin-top:6px;font-size:0.76rem;opacity:0.5">امنیت، سرعت، اعتماد — سه رکن صرافی نیلی</p>
+</footer>
+
+<script>
+const coinsEl=document.getElementById('coins');
+const symbols=['$','€','£','¥','₿','؋'];
+for(let i=0;i<15;i++){
+  const c=document.createElement('div');
+  c.className='coin';
+  c.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+  c.style.left=Math.random()*100+'%';
+  c.style.animationDuration=(8+Math.random()*12)+'s';
+  c.style.animationDelay=(Math.random()*15)+'s';
+  c.style.width=c.style.height=(30+Math.random()*40)+'px';
+  coinsEl.appendChild(c);
+}
+
+const ticker=document.getElementById('ticker');
+ticker.innerHTML+=ticker.innerHTML;
+
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}});
+},{threshold:0.1});
+document.querySelectorAll('.scroll-reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
