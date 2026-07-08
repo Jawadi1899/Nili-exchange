@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صرافی نیلی | Nili Exchange</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&family=Playfair+Display:wght@600;700&family=Lalezar&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--gold:#C9A84C;
+--gold-light:#E8C97A;
+--gold-dark:#8B6914;
+--navy:#0A1628;
+--navy-mid:#1A2E4A;
+--navy-light:#243B5C;
+--white:#FFFFFF;
+--off-white:#F8F5EE;
+--text-muted:#A0A8B8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Vazirmatn',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden}
+
+nav{
+position:fixed;top:0;width:100%;z-index:100;
+background:rgba(10,22,40,0.92);backdrop-filter:blur(12px);
+border-bottom:1px solid rgba(201,168,76,0.2);
+padding:0 2rem;
+display:flex;align-items:center;justify-content:space-between;height:70px;
+}
+.logo{display:flex;flex-direction:column;line-height:1.35}
+.logo-gradient{
+background-image:linear-gradient(to right,#C9A84C,#2FB4C9,#D97B4A,#7A6FD9,#C9A84C);
+background-size:300% 100%;
+-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:logoGradient 10s ease-in-out infinite alternate;
+}
+.logo-fa{font-family:'Lalezar',serif;font-size:1.5rem;font-weight:400;letter-spacing:0.5px}
+.logo-en{font-size:0.7rem;display:block;font-family:'Vazirmatn',sans-serif;font-weight:500;letter-spacing:2.5px;text-transform:uppercase}
+@keyframes logoGradient{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:0.9rem;transition:color 0.3s}
+.nav-links a:hover{color:var(--gold)}
+
+.hero{
+min-height:100vh;display:flex;align-items:center;justify-content:center;
+background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy) 100%);
+position:relative;overflow:hidden;text-align:center;padding:6rem 2rem 4rem;
+}
+.hero-bg{
+position:absolute;inset:0;
+background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(201,168,76,0.08) 0%,transparent 70%);
+}
+.hero-strands{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.6}
+.hero-content{position:relative;z-index:1;max-width:820px}
+.hero-badge{
+display:inline-block;
+background:rgba(201,168,76,0.12);
+border:1px solid rgba(201,168,76,0.35);
+color:var(--gold-light);
+padding:6px 20px;border-radius:50px;
+font-size:0.8rem;letter-spacing:2px;margin-bottom:2rem;
+animation:fadeDown 0.8s ease both;
+}
+.hero h1{
+line-height:1.25;
+margin-bottom:2rem;
+animation:fadeDown 0.8s 0.2s ease both;
+}
+.hero-en{
+font-family:'Playfair Display',serif;
+font-size:clamp(2.6rem,7vw,5rem);
+font-weight:700;letter-spacing:1px;
+background-image:linear-gradient(to right,#C9A84C,#2FB4C9,#D97B4A,#7A6FD9,#C9A84C);
+background-size:300% 100%;
+-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:logoGradient 10s ease-in-out infinite alternate;
+display:inline-block;
+}
+.hero-fa{
+font-family:'Lalezar',serif;
+font-size:clamp(2.4rem,6.5vw,4rem);
+font-weight:400;
+background-image:linear-gradient(to right,#826D31,#1E7582,#8D4F30,#4F488D,#826D31);
+background-size:300% 100%;
+-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:logoGradient 10s ease-in-out infinite alternate;
+display:inline-block;margin-top:0.7rem;
+}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeDown 0.8s 0.6s ease both}
+.btn-gold{
+background:var(--gold);color:var(--navy);
+padding:14px 32px;border-radius:8px;
+text-decoration:none;font-weight:700;font-size:0.95rem;
+transition:all 0.3s;border:none;cursor:pointer;
+}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,0.3)}
+.btn-outline{
+background:transparent;color:var(--gold);
+padding:14px 32px;border-radius:8px;
+text-decoration:none;font-weight:500;font-size:0.95rem;
+border:1.5px solid rgba(201,168,76,0.5);
+transition:all 0.3s;cursor:pointer;
+}
+.btn-outline:hover{background:rgba(201,168,76,0.08);transform:translateY(-2px)}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+
+
+section{padding:5rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.section-title{
+text-align:center;margin-bottom:3.5rem;
+}
+.section-title h2{
+font-family:'Playfair Display',serif;
+font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:0.75rem;
+}
+.section-title h2 span{color:var(--gold)}
+.section-title p{color:var(--text-muted);max-width:550px;margin:0 auto;line-height:1.8}
+.divider{
+width:60px;height:3px;
+background:linear-gradient(to right,var(--gold-dark),var(--gold),var(--gold-dark));
+margin:0 auto 1.5rem;border-radius:2px;
+}
+
+.services{background:var(--navy)}
+
+.why-us{padding:70px 0;text-align:center;background:var(--navy-mid)}
+
+.about-us{padding:90px 0;background:var(--navy)}
+.about-us .container{max-width:900px}
+.scroll-reveal-text{
+font-size:clamp(1.3rem,2.8vw,1.9rem);
+line-height:2;
+font-weight:500;
+text-align:center;
+font-family:'Vazirmatn',sans-serif;
+}
+.scroll-reveal-text .word{
+display:inline-block;
+opacity:0.12;
+filter:blur(4px);
+transition:opacity 0.6s ease,filter 0.6s ease;
+}
+.scroll-reveal-text.in-view .word{opacity:1;filter:blur(0)}
+.focus-container{
+position:relative;display:flex;gap:2.5rem;justify-content:center;align-items:center;
+flex-wrap:wrap;direction:rtl;
+}
+.focus-word{
+position:relative;font-size:clamp(1.4rem,4vw,2.2rem);font-weight:900;
+color:var(--white);user-select:none;filter:blur(6px);
+transition:filter 0.5s ease,color 0.5s ease;
+}
+.focus-word.active{filter:blur(0);color:var(--gold-light)}
+.focus-frame{
+position:absolute;top:0;left:0;pointer-events:none;box-sizing:content-box;
+transition:all 0.5s ease;
+}
+.focus-frame .corner{
+position:absolute;width:1rem;height:1rem;
+border:3px solid var(--gold);
+filter:drop-shadow(0 0 4px rgba(201,168,76,0.7));
+border-radius:3px;
+}
+.focus-frame .top-left{top:-10px;left:-10px;border-right:none;border-bottom:none}
+.focus-frame .top-right{top:-10px;right:-10px;border-left:none;border-bottom:none}
+.focus-frame .bottom-left{bottom:-10px;left:-10px;border-right:none;border-top:none}
+.focus-frame .bottom-right{bottom:-10px;right:-10px;border-left:none;border-top:none}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;position:relative}
+@media(min-width:900px){
+  .services-grid{grid-template-columns:repeat(3,1fr)}
+  .service-card:first-child{grid-column:span 2}
+}
+.service-card{
+--gx:50%;--gy:50%;--gi:0;
+background:var(--navy-mid);
+border:1px solid rgba(201,168,76,0.12);
+border-radius:16px;padding:2rem;
+transition:transform 0.35s,border-color 0.35s,box-shadow 0.35s;
+position:relative;overflow:hidden;isolation:isolate;
+}
+.service-card::before{
+content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:1;
+background:radial-gradient(220px circle at var(--gx) var(--gy),
+  rgba(201,168,76,calc(var(--gi)*0.9)) 0%,
+  rgba(47,180,201,calc(var(--gi)*0.45)) 45%,
+  transparent 70%);
+-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+-webkit-mask-composite:xor;mask-composite:exclude;
+transition:opacity 0.3s;
+}
+.service-card::after{
+content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
+background:radial-gradient(280px circle at var(--gx) var(--gy),rgba(201,168,76,calc(var(--gi)*0.08)),transparent 65%);
+}
+.service-card:hover{transform:translateY(-5px);border-color:rgba(201,168,76,0.3);box-shadow:0 15px 40px rgba(0,0,0,0.3)}
+.service-card>*{position:relative;z-index:2}
+.service-particle{
+position:absolute;width:4px;height:4px;border-radius:50%;
+background:rgba(201,168,76,0.9);box-shadow:0 0 6px rgba(201,168,76,0.6);
+pointer-events:none;z-index:2;opacity:0;
+animation:servicesParticleFloat 2.4s ease-in-out infinite;
+}
+@keyframes servicesParticleFloat{
+0%{opacity:0;transform:translate(0,0) scale(0)}
+15%{opacity:1;transform:translate(0,0) scale(1)}
+50%{opacity:0.8}
+100%{opacity:0;transform:translate(var(--pdx,20px),var(--pdy,-20px)) scale(0.6)}
+}
+.services-spotlight{
+position:fixed;width:600px;height:600px;border-radius:50%;
+pointer-events:none;z-index:5;opacity:0;
+background:radial-gradient(circle,rgba(201,168,76,0.10) 0%,rgba(47,180,201,0.05) 35%,transparent 70%);
+transform:translate(-50%,-50%);mix-blend-mode:screen;
+transition:opacity 0.3s ease;
+}
+.service-icon{
+width:52px;height:52px;border-radius:10px;
+background:rgba(201,168,76,0.1);
+display:flex;align-items:center;justify-content:center;
+margin-bottom:1.2rem;font-size:1.5rem;
+}
+.service-card h3{font-size:1.05rem;margin-bottom:0.6rem;font-weight:500}
+.service-card p{color:var(--text-muted);font-size:0.88rem;line-height:1.8}
+
+.branches{background:var(--navy-mid)}
+.branches-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.branch-card{
+background:var(--navy);
+border:1px solid rgba(201,168,76,0.15);
+border-radius:12px;padding:2rem;
+}
+.branch-badge{
+display:inline-block;
+background:rgba(201,168,76,0.12);
+color:var(--gold);
+font-size:0.75rem;padding:4px 14px;border-radius:50px;
+margin-bottom:1rem;letter-spacing:1px;
+}
+.branch-card h3{font-size:1.2rem;margin-bottom:1rem;font-weight:500}
+.branch-info{display:flex;flex-direction:column;gap:0.6rem}
+.branch-info span{
+display:flex;align-items:center;gap:8px;
+color:var(--text-muted);font-size:0.88rem;
+}
+.branch-info .dot{
+width:6px;height:6px;border-radius:50%;
+background:var(--gold);flex-shrink:0;
+}
+
+.reps{background:var(--navy)}
+.reps-title{color:var(--text-muted);font-size:0.9rem;text-align:center;margin-bottom:2rem}
+.reps-grid{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.rep-item{
+position:relative;overflow:hidden;isolation:isolate;
+--gx:50%;--gy:50%;--gi:0;
+background:var(--navy-mid);
+border:1px solid rgba(201,168,76,0.12);
+border-radius:8px;padding:10px 22px;
+font-size:0.9rem;color:var(--gold-light);
+transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+}
+.rep-item::before{
+content:'';position:absolute;inset:0;border-radius:inherit;z-index:-1;
+background:radial-gradient(90px circle at var(--gx) var(--gy),
+  rgba(201,168,76,calc(var(--gi)*0.45)) 0%,
+  rgba(47,180,201,calc(var(--gi)*0.2)) 45%,
+  transparent 75%);
+transition:opacity 0.25s ease;
+}
+.rep-item:hover{border-color:rgba(201,168,76,0.5);transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,0.15)}
+
+.trust{background:var(--navy-mid)}
+.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem}
+.trust-item{
+--gx:50%;--gy:50%;--gi:0;
+text-align:center;padding:2.2rem 1.5rem;
+background:var(--navy-mid);
+border:1px solid rgba(201,168,76,0.12);
+border-radius:16px;
+position:relative;overflow:hidden;isolation:isolate;
+transition:transform 0.35s,border-color 0.35s,box-shadow 0.35s;
+}
+.trust-item::before{
+content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:0;
+background:radial-gradient(180px circle at var(--gx) var(--gy),
+  rgba(201,168,76,calc(var(--gi)*0.9)) 0%,
+  rgba(47,180,201,calc(var(--gi)*0.45)) 45%,
+  transparent 70%);
+-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+-webkit-mask-composite:xor;mask-composite:exclude;
+transition:opacity 0.3s;
+}
+.trust-item::after{
+content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
+background:radial-gradient(240px circle at var(--gx) var(--gy),rgba(201,168,76,calc(var(--gi)*0.08)),transparent 65%);
+}
+.trust-item:hover{transform:translateY(-5px);border-color:rgba(201,168,76,0.3);box-shadow:0 15px 40px rgba(0,0,0,0.3)}
+.trust-item>*{position:relative;z-index:2}
+.trust-num{
+font-family:'Playfair Display',serif;
+font-size:2.5rem;color:var(--gold);font-weight:600;
+}
+.trust-label{color:var(--text-muted);font-size:0.88rem;margin-top:0.4rem}
+
+.contact-section{background:var(--navy)}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:3rem}
+.contact-card{
+background:var(--navy-mid);
+border:1px solid rgba(201,168,76,0.12);
+border-radius:12px;padding:1.5rem 2rem;
+display:flex;align-items:center;gap:1.2rem;
+transition:all 0.3s;text-decoration:none;
+}
+.contact-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-3px)}
+.contact-icon{
+width:46px;height:46px;border-radius:10px;
+display:flex;align-items:center;justify-content:center;
+font-size:1.3rem;flex-shrink:0;
+}
+.contact-card .c-label{color:var(--text-muted);font-size:0.78rem;margin-bottom:3px}
+.contact-card .c-value{color:var(--white);font-size:0.92rem;font-weight:500}
+
+.social-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+.social-btn{
+display:flex;align-items:center;gap:8px;
+background:var(--navy-mid);
+border:1px solid rgba(201,168,76,0.15);
+border-radius:8px;padding:10px 20px;
+color:var(--text-muted);font-size:0.88rem;
+text-decoration:none;transition:all 0.3s;
+}
+.social-btn:hover{color:var(--gold);border-color:rgba(201,168,76,0.4)}
+.social-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);opacity:0.5}
+
+.star-border-container{
+display:inline-block;position:relative;border-radius:20px;overflow:hidden;padding:1px 0;
+}
+.border-gradient-bottom{
+position:absolute;width:300%;height:50%;opacity:0.7;bottom:-12px;right:-250%;
+border-radius:50%;animation:star-movement-bottom linear infinite alternate;z-index:0;
+}
+.border-gradient-top{
+position:absolute;opacity:0.7;width:300%;height:50%;top:-12px;left:-250%;
+border-radius:50%;animation:star-movement-top linear infinite alternate;z-index:0;
+}
+.star-border-container .inner-content{
+position:relative;border:1px solid #222;background:#000;color:white;
+font-size:16px;text-align:center;padding:16px 26px;border-radius:20px;z-index:1;
+text-decoration:none;display:inline-block;
+}
+@keyframes star-movement-bottom{
+0%{transform:translate(0%,0%);opacity:1}
+100%{transform:translate(-100%,0%);opacity:0}
+}
+@keyframes star-movement-top{
+0%{transform:translate(0%,0%);opacity:1}
+100%{transform:translate(100%,0%);opacity:0}
+}
+
+footer{
+background:var(--navy-mid);
+border-top:1px solid rgba(201,168,76,0.12);
+padding:2rem;text-align:center;
+color:var(--text-muted);font-size:0.82rem;line-height:1.9;
+}
+footer span{color:var(--gold)}
+
+.scroll-reveal{opacity:0;transform:translateY(30px);transition:all 0.7s ease}
+.scroll-reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <span class="logo-gradient logo-fa">صرافی نیلی</span>
+    <span class="logo-gradient logo-en">NILI EXCHANGE</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">خدمات</a></li>
+    <li><a href="#branches">شعبات</a></li>
+    <li><a href="#contact">تماس</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <canvas id="strands-bg" class="hero-strands"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge">✦ مورد اعتماد هزاران مشتری ✦</div>
+    <h1><span class="hero-en">NILI Exchange</span><br><span class="hero-fa">صرافی نیلی</span></h1>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-gold">تماس با ما</a>
+      <a href="#services" class="btn-outline">خدمات ما</a>
+    </div>
+  </div>
+</section>
+
+<section class="about-us">
+  <div class="container">
+    <p class="scroll-reveal-text" id="aboutReveal">صرافی نیلی با سال‌ها تجربه در خدمات ارزی، از دل اعتماد مردم افغانستان زاده شد. ما پلی هستیم میان شما و دنیایی که هر روز کوچک‌تر می‌شود؛ جایی که هر حواله، امانتی است و هر تراکنش، وعده‌ای که به آن پایبندیم. اعتماد شما، سرمایه‌ی واقعی ماست.</p>
+  </div>
+</section>
+
+<section class="why-us">
+  <div class="container">
+    <div class="focus-container" id="trueFocus">
+      <span class="focus-word">امنیت</span>
+      <span class="focus-word">سرعت</span>
+      <span class="focus-word">شفافیت</span>
+      <span class="focus-word">اعتماد</span>
+      <span class="focus-word">تعهد</span>
+      <div class="focus-frame" id="focusFrame">
+        <span class="corner top-left"></span>
+        <span class="corner top-right"></span>
+        <span class="corner bottom-left"></span>
+        <span class="corner bottom-right"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-title scroll-reveal">
+      <div class="divider"></div>
+      <h2>خدمات <span>صرافی نیلی</span></h2>
+      <p>ارائه کامل‌ترین خدمات ارزی با بالاترین استانداردهای حرفه‌ای</p>
+    </div>
+    <div class="services-grid" id="servicesGrid">
+      <div class="service-card scroll-reveal">
+        <div class="service-icon">💱</div>
+        <h3>خرید و فروش ارز</h3>
+        <p>معامله دلار، یورو، درهم، پوند و تمام ارزهای اصلی جهان با بهترین نرخ روز بازار</p>
+      </div>
+      <div class="service-card scroll-reveal">
+        <div class="service-icon">🏦</div>
+        <h3>حواله داخلی افغانستان</h3>
+        <p>انتقال وجه سریع به تمام ولایات افغانستان — از دایکندی تا کابل، هرات، قندهار و مزار شریف</p>
+      </div>
+      <div class="service-card scroll-reveal">
+        <div class="service-icon">🌐</div>
+        <h3>حواله بین‌المللی</h3>
+        <p>ارسال و دریافت حواله به کشورهای مختلف جهان با کمترین کارمزد و بیشترین سرعت</p>
+      </div>
+      <div class="service-card scroll-reveal">
+        <div class="service-icon">🔒</div>
+        <h3>امنیت تراکنش</h3>
+        <p>تمامی تبادلات مالی با بالاترین سطح امنیت و شفافیت کامل انجام می‌گردد</p>
+      </div>
+      <div class="service-card scroll-reveal">
+        <div class="service-icon">📊</div>
+        <h3>نرخ رقابتی</h3>
+        <p>بهترین نرخ‌های ارزی به‌روز شده لحظه‌ای — بدون هزینه‌های پنهان</p>
+      </div>
+      <div class="service-card scroll-reveal">
+        <div class="service-icon">⚡</div>
+        <h3>انتقال فوری</h3>
+        <p>خدمات حواله اضطراری با پردازش در کمتر از چند ساعت برای نیازهای فوری شما</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="branches" id="branches">
+  <div class="container">
+    <div class="section-title scroll-reveal">
+      <div class="divider"></div>
+      <h2>شعبات <span>اصلی</span></h2>
+      <p>حضور در دو کشور برای خدمت‌رسانی بهتر به شما</p>
+    </div>
+    <div class="branches-grid">
+      <div class="branch-card scroll-reveal">
+        <div class="branch-badge">🇦🇫 افغانستان</div>
+        <h3>شعبه دایکندی — شهر نیلی</h3>
+        <div class="branch-info">
+          <span><span class="dot"></span>ولایت دایکندی، مرکز شهر نیلی</span>
+          <span><span class="dot"></span>شعبه مرکزی و اصلی صرافی نیلی</span>
+          <span><span class="dot"></span>تمام روزهای هفته فعال</span>
+        </div>
+      </div>
+      <div class="branch-card scroll-reveal">
+        <div class="branch-badge">🇮🇷 ایران</div>
+        <h3>شعبه تهران</h3>
+        <div class="branch-info">
+          <span><span class="dot"></span>تهران — ایران</span>
+          <span><span class="dot"></span>خدمات کامل ارزی و حواله</span>
+          <span><span class="dot"></span>پاسخگوی جامعه افغانستانی مقیم ایران</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reps scroll-reveal" style="margin-top:3rem">
+      <div class="section-title">
+        <div class="divider"></div>
+        <h2>نمایندگی‌های <span>حواله</span></h2>
+      </div>
+      <p class="reps-title">شبکه گسترده نمایندگی در سراسر افغانستان</p>
+      <div class="reps-grid">
+        <div class="rep-item">📍 دایکندی</div>
+        <div class="rep-item">📍 کابل</div>
+        <div class="rep-item">📍 هرات</div>
+        <div class="rep-item">📍 قندهار</div>
+        <div class="rep-item">📍 غزنی</div>
+        <div class="rep-item">📍 مزار شریف</div>
+        <div class="rep-item">📍 بامیان</div>
+        <div class="rep-item">📍 جلال‌آباد</div>
+        <div class="rep-item">📍 و سایر ولایات</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item scroll-reveal">
+        <div class="trust-num">+۱۰</div>
+        <div class="trust-label">سال تجربه در خدمات ارزی</div>
+      </div>
+      <div class="trust-item scroll-reveal">
+        <div class="trust-num">+۵۰۰۰</div>
+        <div class="trust-label">مشتریان راضی</div>
+      </div>
+      <div class="trust-item scroll-reveal">
+        <div class="trust-num">۲۴/۷</div>
+        <div class="trust-label">پشتیبانی آنلاین</div>
+      </div>
+      <div class="trust-item scroll-reveal">
+        <div class="trust-num">+۹</div>
+        <div class="trust-label">نمایندگی فعال در افغانستان</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-title scroll-reveal">
+      <div class="divider"></div>
+      <h2>ارتباط با <span>ما</span></h2>
+      <p>در تمام پیام‌رسان‌ها در دسترس شما هستیم</p>
+    </div>
+
+    <div class="contact-grid">
+      <a href="https://t.me/ghulamsakhi_jawadi" class="contact-card scroll-reveal" target="_blank">
+        <div class="contact-icon" style="background:rgba(41,182,246,0.1);font-size:1.5rem">✈️</div>
+        <div>
+          <div class="c-label">تلگرام</div>
+          <div class="c-value">@ghulamsakhi_jawadi</div>
+        </div>
+      </a>
+      <a href="https://wa.me/989363344213" class="contact-card scroll-reveal" target="_blank">
+        <div class="contact-icon" style="background:rgba(76,175,122,0.1);font-size:1.5rem">💬</div>
+        <div>
+          <div class="c-label">واتساپ</div>
+          <div class="c-value">09363344213</div>
+        </div>
+      </a>
+      <div class="contact-card scroll-reveal">
+        <div class="contact-icon" style="background:rgba(201,168,76,0.1);font-size:1.5rem">📱</div>
+        <div>
+          <div class="c-label">ایمو / تماس مستقیم</div>
+          <div class="c-value">09363344213</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title scroll-reveal" style="margin-top:3rem;margin-bottom:1.5rem">
+      <h2 style="font-size:1.4rem">شبکه‌های <span>اجتماعی</span></h2>
+    </div>
+    <div class="social-row scroll-reveal">
+      <a href="https://facebook.com/ghulamsakhi.jawadi" class="social-btn" target="_blank">
+        <span class="social-dot"></span> فیسبوک
+      </a>
+      <a href="https://instagram.com/ghulamsakhi_jawadi" class="social-btn" target="_blank">
+        <span class="social-dot"></span> اینستاگرام
+      </a>
+      <a href="https://x.com/ghulamsakhi_jawadi" class="social-btn" target="_blank">
+        <span class="social-dot"></span> X (توییتر)
+      </a>
+    </div>
+    <p style="text-align:center;color:var(--text-muted);font-size:0.82rem;margin-top:1rem">
+      در تمام پلتفرم‌ها با نام: <span style="color:var(--gold)">ghulamsakhijawadi</span>
+    </p>
+
+    <div style="text-align:center;margin-top:2.5rem" class="scroll-reveal">
+      <a href="https://wa.me/989363344213" target="_blank" class="star-border-container">
+        <div class="border-gradient-bottom" style="background:radial-gradient(circle, magenta, transparent 10%);animation-duration:5s"></div>
+        <div class="border-gradient-top" style="background:radial-gradient(circle, magenta, transparent 10%);animation-duration:5s"></div>
+        <div class="inner-content">پشتیبانی آنلاین ۲۴/۷</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© ۱۴۰۳ — <span>صرافی نیلی | Nili Exchange</span></p>
+  <p style="margin-top:6px">دایکندی، افغانستان &nbsp;|&nbsp; تهران، ایران &nbsp;|&nbsp; ۰۹۳۶۳۳۴۴۲۱۳</p>
+  <p style="margin-top:6px;font-size:0.76rem;opacity:0.5">امنیت، سرعت، اعتماد — سه رکن صرافی نیلی</p>
+</footer>
+
+<script>
+(function(){
+  var canvas = document.getElementById('strands-bg');
+  var gl = canvas.getContext('webgl2', {alpha:true, antialias:true, premultipliedAlpha:true});
+  if(!gl){ canvas.style.display='none'; return; }
+
+  var VERT = '#version 300 es\n' +
+    'in vec2 position;\n' +
+    'void main(){ gl_Position = vec4(position, 0.0, 1.0); }';
+
+  var FRAG = '#version 300 es\n' +
+    'precision mediump float;\n' +
+    'uniform float uTime;\n' +
+    'uniform vec2 uResolution;\n' +
+    'uniform vec3 uColors[4];\n' +
+    'uniform int uColorCount;\n' +
+    'uniform int uStrandCount;\n' +
+    'uniform float uSpeed;\n' +
+    'uniform float uAmplitude;\n' +
+    'uniform float uWaviness;\n' +
+    'uniform float uThickness;\n' +
+    'uniform float uGlow;\n' +
+    'uniform float uTaper;\n' +
+    'uniform float uSpread;\n' +
+    'uniform float uHueShift;\n' +
+    'uniform float uIntensity;\n' +
+    'uniform float uOpacity;\n' +
+    'uniform float uScale;\n' +
+    'uniform float uSaturation;\n' +
+    'out vec4 fragColor;\n' +
+    'const float PI = 3.14159265;\n' +
+    'vec3 samplePalette(float t){\n' +
+    '  t = fract(t);\n' +
+    '  float scaled = t * float(uColorCount);\n' +
+    '  int idx = int(floor(scaled));\n' +
+    '  float blend = fract(scaled);\n' +
+    '  int nextIdx = idx + 1;\n' +
+    '  if(nextIdx >= uColorCount) nextIdx = 0;\n' +
+    '  return mix(uColors[idx], uColors[nextIdx], blend);\n' +
+    '}\n' +
+    'void main(){\n' +
+    '  vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution) / uResolution.y;\n' +
+    '  uv /= max(uScale, 0.0001);\n' +
+    '  float e = 0.06 + uIntensity * 0.94;\n' +
+    '  float env = pow(max(cos(uv.x * PI * 1.3), 0.0), uTaper);\n' +
+    '  vec3 col = vec3(0.0);\n' +
+    '  for(int i = 0; i < 4; i++){\n' +
+    '    if(i >= uStrandCount) break;\n' +
+    '    float fi = float(i);\n' +
+    '    float ph = fi * 1.7 * uSpread;\n' +
+    '    float freq = (2.0 + fi * 0.35) * uWaviness;\n' +
+    '    float spd = 1.4 + fi * 1.2;\n' +
+    '    float tt = uTime * uSpeed;\n' +
+    '    float w = sin(uv.x * freq + tt * spd + ph) * 0.60 + sin(uv.x * freq * 1.1 - tt * spd * 0.7 + ph * 1.7) * 0.40;\n' +
+    '    float amp = (0.1 + 0.02 * e) * env * uAmplitude;\n' +
+    '    float y = w * amp;\n' +
+    '    float d = abs(uv.y - y);\n' +
+    '    float thick = (0.001 + 0.05 * e) * (0.35 + env) * uThickness;\n' +
+    '    float g = thick / (d + thick * 0.45);\n' +
+    '    g = g * g;\n' +
+    '    float h = fi / float(uStrandCount) + uv.x * 0.30 + uTime * 0.04 + uHueShift;\n' +
+    '    col += samplePalette(h) * g * env;\n' +
+    '  }\n' +
+    '  col *= 0.45 + 0.7 * e;\n' +
+    '  col = 1.0 - exp(-col * uGlow);\n' +
+    '  float gray = dot(col, vec3(0.2126, 0.7152, 0.0722));\n' +
+    '  col = max(mix(vec3(gray), col, uSaturation), 0.0);\n' +
+    '  float lum = max(max(col.r, col.g), col.b);\n' +
+    '  float alpha = clamp(lum, 0.0, 1.0) * uOpacity;\n' +
+    '  fragColor = vec4(col * uOpacity, alpha);\n' +
+    '}';
+
+  function compile(type, src){
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){
+      console.warn('Strands shader error:', gl.getShaderInfoLog(s));
+      gl.deleteShader(s);
+      return null;
+    }
+    return s;
+  }
+
+  var vs = compile(gl.VERTEX_SHADER, VERT);
+  var fs = compile(gl.FRAGMENT_SHADER, FRAG);
+  if(!vs || !fs){ canvas.style.display='none'; return; }
+
+  var program = gl.createProgram();
+  gl.attachShader(program, vs);
+  gl.attachShader(program, fs);
+  gl.linkProgram(program);
+  if(!gl.getProgramParameter(program, gl.LINK_STATUS)){
+    console.warn('Strands program link error:', gl.getProgramInfoLog(program));
+    canvas.style.display='none';
+    return;
+  }
+  gl.useProgram(program);
+
+  var posBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+  var posLoc = gl.getAttribLocation(program, 'position');
+  gl.enableVertexAttribArray(posLoc);
+  gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+  gl.clearColor(0,0,0,0);
+
+  function hexToRgb(hex){
+    var v = parseInt(hex.replace('#',''), 16);
+    return [((v>>16)&255)/255, ((v>>8)&255)/255, (v&255)/255];
+  }
+  var palette = ['#C9A84C', '#2FB4C9', '#D97B4A', '#7A6FD9'];
+  var colorsFlat = [];
+  for(var i=0;i<4;i++){
+    var hex = palette[i] || palette[palette.length-1];
+    colorsFlat = colorsFlat.concat(hexToRgb(hex));
+  }
+
+  var u = {};
+  ['uTime','uResolution','uColors','uColorCount','uStrandCount','uSpeed','uAmplitude',
+   'uWaviness','uThickness','uGlow','uTaper','uSpread','uHueShift','uIntensity',
+   'uOpacity','uScale','uSaturation'].forEach(function(name){
+    u[name] = gl.getUniformLocation(program, name);
+  });
+
+  gl.uniform3fv(u.uColors, new Float32Array(colorsFlat));
+  gl.uniform1i(u.uColorCount, palette.length);
+  gl.uniform1i(u.uStrandCount, 4);
+  gl.uniform1f(u.uSpeed, 0.4);
+  gl.uniform1f(u.uAmplitude, 1.0);
+  gl.uniform1f(u.uWaviness, 1.0);
+  gl.uniform1f(u.uThickness, 0.6);
+  gl.uniform1f(u.uGlow, 2.2);
+  gl.uniform1f(u.uTaper, 3.0);
+  gl.uniform1f(u.uSpread, 1.0);
+  gl.uniform1f(u.uHueShift, 0.0);
+  gl.uniform1f(u.uIntensity, 0.5);
+  gl.uniform1f(u.uOpacity, 0.7);
+  gl.uniform1f(u.uScale, 1.6);
+  gl.uniform1f(u.uSaturation, 1.2);
+
+  var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  function resize(){
+    var parent = canvas.parentElement;
+    var w = parent.offsetWidth, h = parent.offsetHeight;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.uniform2f(u.uResolution, canvas.width, canvas.height);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  var rafId = 0;
+  var visible = true;
+  var io = new IntersectionObserver(function(entries){
+    visible = entries[0].isIntersecting;
+    if(visible && !rafId) rafId = requestAnimationFrame(draw);
+  });
+  io.observe(canvas);
+
+  function draw(t){
+    rafId = visible ? requestAnimationFrame(draw) : 0;
+    gl.uniform1f(u.uTime, t * 0.001);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+  rafId = requestAnimationFrame(draw);
+})();
+
+
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); }
+    else { e.target.classList.remove('visible'); }
+  });
+},{threshold:0.15});
+document.querySelectorAll('.scroll-reveal').forEach(el=>obs.observe(el));
+
+(function(){
+  var words = document.querySelectorAll('#trueFocus .focus-word');
+  var frame = document.getElementById('focusFrame');
+  var container = document.getElementById('trueFocus');
+  if(!words.length || !frame || !container) return;
+  var idx = 0;
+  var duration = 0.5;
+  var pause = 1.2;
+
+  function updateFrame(activeIdx){
+    var el = words[activeIdx];
+    var parentRect = container.getBoundingClientRect();
+    var rect = el.getBoundingClientRect();
+    frame.style.left = (rect.left - parentRect.left) + 'px';
+    frame.style.top = (rect.top - parentRect.top) + 'px';
+    frame.style.width = rect.width + 'px';
+    frame.style.height = rect.height + 'px';
+  }
+
+  function setActive(activeIdx){
+    words.forEach(function(w, i){
+      if(i === activeIdx){ w.classList.add('active'); }
+      else { w.classList.remove('active'); }
+    });
+    updateFrame(activeIdx);
+  }
+
+  var started = false;
+  var intervalId = null;
+  function start(){
+    if(started) return;
+    started = true;
+    setActive(idx);
+    intervalId = setInterval(function(){
+      idx = (idx + 1) % words.length;
+      setActive(idx);
+    }, (duration + pause) * 1000);
+  }
+
+  var focusObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) start(); });
+  }, {threshold: 0.3});
+  focusObserver.observe(container);
+
+  window.addEventListener('resize', function(){ if(started) updateFrame(idx); });
+})();
+
+(function(){
+  var el = document.getElementById('aboutReveal');
+  if(!el) return;
+  var text = el.textContent.trim();
+  var parts = text.split(/(\s+)/);
+  el.innerHTML = '';
+  var wordIndex = 0;
+  parts.forEach(function(part){
+    if(/^\s+$/.test(part)){
+      el.appendChild(document.createTextNode(part));
+    } else if(part.length){
+      var span = document.createElement('span');
+      span.className = 'word';
+      span.textContent = part;
+      span.style.transitionDelay = (wordIndex * 0.04) + 's';
+      el.appendChild(span);
+      wordIndex++;
+    }
+  });
+
+  var revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        el.classList.add('in-view');
+      } else {
+        el.classList.remove('in-view');
+      }
+    });
+  }, {threshold: 0.3});
+  revealObserver.observe(el);
+})();
+
+(function(){
+  var items = document.querySelectorAll('.rep-item');
+  items.forEach(function(item){
+    item.addEventListener('mousemove', function(e){
+      var rect = item.getBoundingClientRect();
+      var x = ((e.clientX - rect.left) / rect.width) * 100;
+      var y = ((e.clientY - rect.top) / rect.height) * 100;
+      item.style.setProperty('--gx', x + '%');
+      item.style.setProperty('--gy', y + '%');
+      item.style.setProperty('--gi', '1');
+    });
+    item.addEventListener('mouseleave', function(){
+      item.style.setProperty('--gi', '0');
+    });
+  });
+})();
+
+(function(){
+  var trustItems = document.querySelectorAll('.trust-item');
+  trustItems.forEach(function(item){
+    item.addEventListener('mousemove', function(e){
+      var rect = item.getBoundingClientRect();
+      var x = ((e.clientX - rect.left) / rect.width) * 100;
+      var y = ((e.clientY - rect.top) / rect.height) * 100;
+      item.style.setProperty('--gx', x + '%');
+      item.style.setProperty('--gy', y + '%');
+      item.style.setProperty('--gi', '1');
+    });
+    item.addEventListener('mouseleave', function(){
+      item.style.setProperty('--gi', '0');
+    });
+  });
+})();
+
+(function(){
+  var grid = document.getElementById('servicesGrid');
+  if(!grid) return;
+  var cards = grid.querySelectorAll('.service-card');
+
+  var spotlight = document.createElement('div');
+  spotlight.className = 'services-spotlight';
+  document.body.appendChild(spotlight);
+
+  function handleMove(e){
+    var rect = grid.getBoundingClientRect();
+    var inside = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
+    if(!inside){
+      spotlight.style.opacity = '0';
+      cards.forEach(function(c){ c.style.setProperty('--gi','0'); });
+      return;
+    }
+    spotlight.style.left = e.clientX + 'px';
+    spotlight.style.top = e.clientY + 'px';
+    spotlight.style.opacity = '1';
+
+    cards.forEach(function(card){
+      var cRect = card.getBoundingClientRect();
+      var x = ((e.clientX - cRect.left) / cRect.width) * 100;
+      var y = ((e.clientY - cRect.top) / cRect.height) * 100;
+      var dist = Math.hypot(e.clientX - (cRect.left + cRect.width/2), e.clientY - (cRect.top + cRect.height/2));
+      var proximity = Math.max(cRect.width, cRect.height) * 0.75;
+      var intensity = Math.max(0, 1 - dist / proximity);
+      card.style.setProperty('--gx', x + '%');
+      card.style.setProperty('--gy', y + '%');
+      card.style.setProperty('--gi', intensity.toFixed(2));
+    });
+  }
+  document.addEventListener('mousemove', handleMove);
+  document.addEventListener('mouseleave', function(){
+    spotlight.style.opacity = '0';
+    cards.forEach(function(c){ c.style.setProperty('--gi','0'); });
+  });
+
+  cards.forEach(function(card){
+    var particleTimer = null;
+    card.addEventListener('mouseenter', function(){
+      var count = 0;
+      particleTimer = setInterval(function(){
+        if(count >= 8){ clearInterval(particleTimer); return; }
+        count++;
+        var p = document.createElement('span');
+        p.className = 'service-particle';
+        var rect = card.getBoundingClientRect();
+        p.style.left = (Math.random() * rect.width) + 'px';
+        p.style.top = (Math.random() * rect.height) + 'px';
+        p.style.setProperty('--pdx', ((Math.random()-0.5) * 40) + 'px');
+        p.style.setProperty('--pdy', ((Math.random()-0.5) * 40) + 'px');
+        card.appendChild(p);
+        setTimeout(function(){ p.remove(); }, 2400);
+      }, 180);
+    });
+    card.addEventListener('mouseleave', function(){
+      if(particleTimer) clearInterval(particleTimer);
+    });
+    card.addEventListener('click', function(e){
+      var rect = card.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      var maxDist = Math.max(
+        Math.hypot(x, y), Math.hypot(x-rect.width, y),
+        Math.hypot(x, y-rect.height), Math.hypot(x-rect.width, y-rect.height)
+      );
+      var ripple = document.createElement('span');
+      ripple.style.cssText = 'position:absolute;border-radius:50%;pointer-events:none;z-index:1;'+
+        'width:'+(maxDist*2)+'px;height:'+(maxDist*2)+'px;'+
+        'left:'+(x-maxDist)+'px;top:'+(y-maxDist)+'px;'+
+        'background:radial-gradient(circle,rgba(201,168,76,0.35) 0%,rgba(201,168,76,0.15) 30%,transparent 70%);'+
+        'transform:scale(0);opacity:1;transition:transform 0.7s ease,opacity 0.7s ease;';
+      card.appendChild(ripple);
+      requestAnimationFrame(function(){
+        ripple.style.transform = 'scale(1)';
+        ripple.style.opacity = '0';
+      });
+      setTimeout(function(){ ripple.remove(); }, 750);
+    });
+  });
+})();
+</script>
+</body>
+</html>
