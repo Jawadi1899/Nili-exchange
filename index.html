@@ -6,7 +6,7 @@
 <title>صرافی نیلی | NILI Exchange</title>
 <meta name="description" content="صرافی نیلی — ارزش را با اطمینان، فراتر از مرزها جابه‌جا کنید. خرید و فروش ارز، حواله داخلی افغانستان و حواله بین‌المللی با امنیت و سرعت.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Naskh+Arabic:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Naskh+Arabic:wght@600;700&family=Unbounded:wght@700;800&family=Lalezar&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -89,9 +89,26 @@ nav{
   -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.75) 0%,rgba(0,0,0,.55) 40%,rgba(0,0,0,.85) 70%,rgba(0,0,0,.25) 100%);}
 @media(max-width:700px){.hero-fin-canvas{opacity:.4}}
 .hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:760px;margin:0 auto}
+
+/* ---------- GRADUAL BLUR (scroll-down cue at hero bottom) ---------- */
+.gradual-blur{position:absolute;left:0;right:0;bottom:0;height:9rem;z-index:6;pointer-events:none;isolation:isolate}
+.gradual-blur-inner{position:relative;width:100%;height:100%}
+.gradual-blur-inner>div{position:absolute;inset:0}
+.gradual-blur-tint{background:linear-gradient(to bottom,transparent 0%,rgba(12,16,13,.55) 55%,var(--ink) 100%)}
+@supports not (backdrop-filter:blur(1px)){
+  .gradual-blur-inner>div{background:linear-gradient(to bottom,transparent,var(--ink) 90%);opacity:.6}
+}
+@media(max-width:700px){.gradual-blur{height:6rem}}
 .services-line{font-family:'Vazirmatn',sans-serif;font-weight:600;font-size:clamp(1.05rem,2.4vw,1.35rem);
   color:var(--teal);letter-spacing:.3px;margin-top:1.4rem;display:flex;align-items:center;gap:.9rem;justify-content:center}
+.services-line--stacked{margin-top:.65rem}
 .services-line::before,.services-line::after{content:"";width:34px;height:1px;background:var(--line)}
+.rotating-badge{position:relative;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;
+  height:2.6em;min-width:11em;padding:0 1.15em;border-radius:999px;vertical-align:middle;
+  background:linear-gradient(135deg,var(--amber),var(--teal));box-shadow:0 6px 22px rgba(63,203,126,.34)}
+.rotating-badge-current{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(1rem,2.3vw,1.3rem);letter-spacing:.4px;color:var(--ink);white-space:nowrap}
+.rotating-badge-current--fa{font-family:'Lalezar',serif;font-weight:400;font-size:clamp(1.1rem,2.5vw,1.45rem);letter-spacing:0}
 @media(max-width:900px){
   .hero-tagline,.hero-btns,.flapboard{margin-left:auto;margin-right:auto}
   .flap-note{text-align:center}
@@ -166,11 +183,72 @@ nav{
 .flap-arrow{color:var(--muted-2);font-size:1.1rem;margin:0 .3rem}
 .flap-note{margin-top:.6rem;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--muted-2);direction:rtl;text-align:right}
 
-/* ---------- TICKER ---------- */
-.ticker-strip{background:var(--amber);color:var(--ink);overflow:hidden;padding:0.9rem 0}
-.ticker-track{display:flex;gap:3rem;width:max-content;animation:tickerScroll 26s linear infinite}
-.ticker-track span{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.85rem;white-space:nowrap}
-@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* ---------- TICKER (SplitFlapText port) ---------- */
+.flap-ticker-wrap{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.3rem 0;overflow:hidden;display:flex;justify-content:center}
+
+.split-flap-text{
+  --split-flap-tile-color:var(--panel);
+  --split-flap-text-color:var(--paper);
+  --split-flap-radius:6px;
+  --split-flap-gap:5px;
+  --split-flap-font-size:clamp(.72rem,2vw,1.3rem);
+  --split-flap-flip-duration:0.12s;
+  direction:ltr;
+  display:inline-flex;align-items:center;gap:var(--split-flap-gap,6px);
+  color:var(--split-flap-text-color,#f8fafc);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:var(--split-flap-font-size,52px);
+  font-weight:600;line-height:1;letter-spacing:.06em;white-space:pre;user-select:none;
+  font-variant-numeric:tabular-nums;
+}
+.split-flap-text__tile{
+  position:relative;width:.78em;height:1.28em;overflow:hidden;
+  border-radius:var(--split-flap-radius,8px);
+  background:radial-gradient(circle at 50% 0%, rgba(255,255,255,.1), transparent 44%),
+    linear-gradient(180deg,color-mix(in srgb,var(--split-flap-tile-color,#111827) 85%,white),var(--split-flap-tile-color,#111827));
+  box-shadow:0 .035em .08em rgba(255,255,255,.07) inset,0 -.05em .1em rgba(0,0,0,.4) inset,0 .16em .38em rgba(0,0,0,.32);
+  perspective:520px;transform-style:preserve-3d;isolation:isolate;
+}
+.split-flap-text__tile::before{
+  content:'';position:absolute;z-index:8;top:calc(50% - .5px);left:0;width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.14) 18%,rgba(0,0,0,.6) 50%,rgba(255,255,255,.1) 82%,transparent);
+  box-shadow:0 -1px 0 rgba(255,255,255,.06),0 1px 0 rgba(0,0,0,.45);pointer-events:none;
+}
+.split-flap-text__tile::after{
+  content:'';position:absolute;inset:0;z-index:9;border:1px solid var(--line);border-radius:inherit;
+  box-shadow:0 0 0 1px rgba(0,0,0,.15) inset;pointer-events:none;
+}
+.split-flap-text__half,.split-flap-text__flap{
+  position:absolute;left:0;width:100%;height:50%;overflow:hidden;
+  background:linear-gradient(180deg,rgba(255,255,255,.06),transparent 34%),var(--split-flap-tile-color,#111827);
+  backface-visibility:hidden;
+}
+.split-flap-text__half--top,.split-flap-text__flap--front{top:0}
+.split-flap-text__half--bottom,.split-flap-text__flap--back{bottom:0}
+.split-flap-text__half--bottom,.split-flap-text__flap--back{
+  background:linear-gradient(0deg,rgba(255,255,255,.05),transparent 38%),
+    color-mix(in srgb,var(--split-flap-tile-color,#111827) 92%,black);
+}
+.split-flap-text__char{
+  position:absolute;left:0;width:100%;height:200%;display:flex;align-items:center;justify-content:center;
+  color:var(--split-flap-text-color,#f8fafc);
+  text-shadow:0 .025em 0 rgba(255,255,255,.12),0 .09em .16em rgba(0,0,0,.4);
+}
+.split-flap-text__half--top .split-flap-text__char,.split-flap-text__flap--front .split-flap-text__char{top:0}
+.split-flap-text__half--bottom .split-flap-text__char,.split-flap-text__flap--back .split-flap-text__char{bottom:0}
+.split-flap-text__flap{z-index:6;will-change:transform,filter;transform-style:preserve-3d}
+.split-flap-text__flap--front{
+  transform-origin:center bottom;
+  animation:split-flap-front var(--split-flap-flip-duration,.12s) cubic-bezier(.23,1,.32,1) both;
+}
+.split-flap-text__flap--back{
+  transform-origin:center top;transform:rotateX(90deg);
+  animation:split-flap-back var(--split-flap-flip-duration,.12s) cubic-bezier(.23,1,.32,1) both;
+}
+@keyframes split-flap-front{0%{transform:rotateX(0deg);filter:brightness(1.08)}100%{transform:rotateX(-90deg);filter:brightness(.52)}}
+@keyframes split-flap-back{0%,45%{transform:rotateX(90deg);filter:brightness(.58)}100%{transform:rotateX(0deg);filter:brightness(1)}}
+@media(prefers-reduced-motion:reduce){.split-flap-text__flap{animation:none!important}}
+@media(max-width:640px){.split-flap-text{--split-flap-gap:3px}.split-flap-text__tile{width:.74em}}
 
 /* ---------- SECTION HEADERS ---------- */
 .sec-head{margin-bottom:3.2rem}
@@ -297,23 +375,41 @@ footer .amber{color:var(--amber)}
 
   <div class="container hero-inner">
     <div class="eyebrow"><span class="dot"></span> صرافی و حواله معتبر &nbsp;•&nbsp; دایکندی — تهران</div>
-    <h1 class="particle-text" id="brandParticleEn" aria-label="NILI EXCHANGE" style="margin-bottom:-0.4rem">
-      <canvas class="particle-text__canvas" aria-hidden="true"></canvas>
-      <span class="particle-text__sr">NILI EXCHANGE</span>
-    </h1>
-    <div class="stroke-text" id="brandStrokeFa" style="--stroke-text-height:clamp(80px,12vw,130px)" role="img" aria-label="صرافی نیلی">
-      <svg class="stroke-text__svg" id="strokeSvgFa" viewBox="0 -100 600 130" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <div class="stroke-text" id="brandStrokeEn" style="--stroke-text-height:clamp(58px,8.5vw,96px);margin-bottom:-0.2rem" role="img" aria-label="NILI EXCHANGE">
+      <svg class="stroke-text__svg" id="strokeSvgEn" viewBox="0 -75 640 95" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
         <defs>
-          <clipPath id="strokeWipeFa" clipPathUnits="userSpaceOnUse">
-            <rect id="strokeWipeRectFa" x="0" y="-100" width="0" height="130"></rect>
+          <clipPath id="wipeClipEn" clipPathUnits="userSpaceOnUse">
+            <rect id="wipeRectEn" x="0" y="-75" width="0" height="95"></rect>
           </clipPath>
         </defs>
-        <text id="strokeStrokeFa" class="stroke-text__stroke" x="0" y="0" fill="none" stroke="#A78BFA" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" style="font-size:72px;font-weight:700;font-family:'Noto Naskh Arabic',serif">صرافی نیلی</text>
-        <text id="strokeFillFa" class="stroke-text__fill" x="0" y="0" fill="#F8FAFC" stroke="none" style="font-size:72px;font-weight:700;font-family:'Noto Naskh Arabic',serif" clip-path="url(#strokeWipeFa)">صرافی نیلی</text>
+        <text id="strokeOutlineEn" xml:space="preserve" x="0" y="0" fill="none" stroke="#A78BFA" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" style="font-size:56px;font-weight:800;letter-spacing:-1px;font-family:'Unbounded',sans-serif"><tspan data-stroke-char>N</tspan><tspan data-stroke-char>I</tspan><tspan data-stroke-char>L</tspan><tspan data-stroke-char>I</tspan><tspan data-stroke-char> </tspan><tspan data-stroke-char>E</tspan><tspan data-stroke-char>X</tspan><tspan data-stroke-char>C</tspan><tspan data-stroke-char>H</tspan><tspan data-stroke-char>A</tspan><tspan data-stroke-char>N</tspan><tspan data-stroke-char>G</tspan><tspan data-stroke-char>E</tspan></text>
+        <text id="strokeFillEn" xml:space="preserve" x="0" y="0" fill="#F8FAFC" stroke="none" style="font-size:56px;font-weight:800;letter-spacing:-1px;font-family:'Unbounded',sans-serif" clip-path="url(#wipeClipEn)"><tspan data-fill-char>N</tspan><tspan data-fill-char>I</tspan><tspan data-fill-char>L</tspan><tspan data-fill-char>I</tspan><tspan data-fill-char> </tspan><tspan data-fill-char>E</tspan><tspan data-fill-char>X</tspan><tspan data-fill-char>C</tspan><tspan data-fill-char>H</tspan><tspan data-fill-char>A</tspan><tspan data-fill-char>N</tspan><tspan data-fill-char>G</tspan><tspan data-fill-char>E</tspan></text>
+      </svg>
+    </div>
+    <div class="stroke-text" id="brandStrokeFa" style="--stroke-text-height:clamp(78px,11.5vw,124px)" role="img" aria-label="صرافی نیلی">
+      <svg class="stroke-text__svg" id="strokeSvgFa" viewBox="0 -100 600 130" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <clipPath id="wipeClipFa" clipPathUnits="userSpaceOnUse">
+            <rect id="wipeRectFa" x="0" y="-100" width="0" height="130"></rect>
+          </clipPath>
+        </defs>
+        <text id="strokeOutlineFa" xml:space="preserve" x="0" y="0" fill="none" stroke="#A78BFA" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" style="font-size:76px;font-weight:400;font-family:'Lalezar',serif"><tspan data-stroke-char>ص</tspan><tspan data-stroke-char>ر</tspan><tspan data-stroke-char>ا</tspan><tspan data-stroke-char>ف</tspan><tspan data-stroke-char>ی</tspan><tspan data-stroke-char> </tspan><tspan data-stroke-char>ن</tspan><tspan data-stroke-char>ی</tspan><tspan data-stroke-char>ل</tspan><tspan data-stroke-char>ی</tspan></text>
+        <text id="strokeFillFa" xml:space="preserve" x="0" y="0" fill="#F8FAFC" stroke="none" style="font-size:76px;font-weight:400;font-family:'Lalezar',serif" clip-path="url(#wipeClipFa)"><tspan data-fill-char>ص</tspan><tspan data-fill-char>ر</tspan><tspan data-fill-char>ا</tspan><tspan data-fill-char>ف</tspan><tspan data-fill-char>ی</tspan><tspan data-fill-char> </tspan><tspan data-fill-char>ن</tspan><tspan data-fill-char>ی</tspan><tspan data-fill-char>ل</tspan><tspan data-fill-char>ی</tspan></text>
       </svg>
     </div>
 
-    <div class="services-line">خدمات ارزی داخلی و بین‌المللی</div>
+    <div class="services-line">
+      <span>CURRENCY SERVICES</span>
+      <span class="rotating-badge" id="rotatingBadgeEn">
+        <span class="rotating-badge-current" id="rotatingBadgeCurrentEn">DOMESTIC</span>
+      </span>
+    </div>
+    <div class="services-line services-line--stacked">
+      <span>خدمات ارزی</span>
+      <span class="rotating-badge" id="rotatingBadgeFa">
+        <span class="rotating-badge-current rotating-badge-current--fa" id="rotatingBadgeCurrentFa">داخلی</span>
+      </span>
+    </div>
 
     <p class="hero-tagline"><b>ارزش را با اطمینان، فراتر از مرزها جابه‌جا کنید.</b><br>خرید و فروش ارز، حواله داخلی افغانستان و حواله بین‌المللی، با شفافیت کامل و سرعت واقعی.</p>
     <div class="hero-btns">
@@ -327,10 +423,21 @@ footer .amber{color:var(--amber)}
       <div class="flap-note">نرخ لحظه‌ای در تمام شعبات و نمایندگی‌ها اعلام می‌شود</div>
     </div>
   </div>
+
+  <div class="gradual-blur" aria-hidden="true">
+    <div class="gradual-blur-inner">
+      <div style="-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 20%,black 40%,transparent 60%);mask-image:linear-gradient(to bottom,transparent 0%,black 20%,black 40%,transparent 60%);-webkit-backdrop-filter:blur(.167rem);backdrop-filter:blur(.167rem)"></div>
+      <div style="-webkit-mask-image:linear-gradient(to bottom,transparent 20%,black 40%,black 60%,transparent 80%);mask-image:linear-gradient(to bottom,transparent 20%,black 40%,black 60%,transparent 80%);-webkit-backdrop-filter:blur(.332rem);backdrop-filter:blur(.332rem)"></div>
+      <div style="-webkit-mask-image:linear-gradient(to bottom,transparent 40%,black 60%,black 80%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 40%,black 60%,black 80%,transparent 100%);-webkit-backdrop-filter:blur(.754rem);backdrop-filter:blur(.754rem)"></div>
+      <div style="-webkit-mask-image:linear-gradient(to bottom,transparent 60%,black 80%,black 100%);mask-image:linear-gradient(to bottom,transparent 60%,black 80%,black 100%);-webkit-backdrop-filter:blur(1.499rem);backdrop-filter:blur(1.499rem)"></div>
+      <div style="-webkit-mask-image:linear-gradient(to bottom,transparent 80%,black 100%);mask-image:linear-gradient(to bottom,transparent 80%,black 100%);-webkit-backdrop-filter:blur(2rem);backdrop-filter:blur(2rem)"></div>
+      <div class="gradual-blur-tint"></div>
+    </div>
+  </div>
 </section>
 
-<div class="ticker-strip">
-  <div class="ticker-track" id="tickerTrack"></div>
+<div class="flap-ticker-wrap">
+  <div class="split-flap-text" id="flapTicker" role="text"></div>
 </div>
 
 <section class="section-alt" id="services">
@@ -555,14 +662,182 @@ footer .amber{color:var(--amber)}
   }, 2600);
 })();
 
-// ticker strip content
+// rotating word — English badge (DOMESTIC/INTERNATIONAL) + Persian badge (داخلی/بین‌المللی), swapping in perfect sync
 (function(){
-  var track=document.getElementById('tickerTrack');
-  if(!track) return;
-  var items=['USD نرخ روز فعال','EUR استعلام فوری','AFN حواله افغانستان فعال','AED خرید و فروش','IRR شعبه تهران فعال','ارزش را با اطمینان، فراتر از مرزها جابه‌جا کنید'];
-  var html='';
-  for(var r=0;r<3;r++){ items.forEach(function(t){ html+='<span>'+t+'</span>'; }); }
-  track.innerHTML=html;
+  var scopeEn=document.getElementById('rotatingBadgeEn');
+  var curEn=document.getElementById('rotatingBadgeCurrentEn');
+  var scopeFa=document.getElementById('rotatingBadgeFa');
+  var curFa=document.getElementById('rotatingBadgeCurrentFa');
+  if(!scopeEn||!curEn||!scopeFa||!curFa) return;
+
+  var wordsEn=['DOMESTIC','INTERNATIONAL'];
+  var wordsFa=['داخلی','بین‌المللی'];
+  var hasGsap=(typeof gsap!=='undefined');
+  var reducedMotion=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)').matches:false;
+  if(reducedMotion || !hasGsap) return;
+
+  function swapOne(scope,outgoing,text,extraClass){
+    var incoming=document.createElement('span');
+    incoming.className='rotating-badge-current'+(extraClass?(' '+extraClass):'');
+    incoming.textContent=text;
+    scope.appendChild(incoming);
+    gsap.set(incoming,{yPercent:100,opacity:0});
+    gsap.to(outgoing,{yPercent:-120,opacity:0,duration:.5,ease:'power3.in',onComplete:function(){ outgoing.remove(); }});
+    gsap.to(incoming,{yPercent:0,opacity:1,duration:.55,ease:'back.out(1.5)'});
+    return incoming;
+  }
+
+  var idx=0;
+  function swap(){
+    var nextIdx=(idx+1)%wordsEn.length;
+    curEn=swapOne(scopeEn,curEn,wordsEn[nextIdx]);
+    curFa=swapOne(scopeFa,curFa,wordsFa[nextIdx],'rotating-badge-current--fa');
+    idx=nextIdx;
+  }
+  setInterval(swap,2000);
+})();
+
+// stationary split-flap ticker — vanilla port of the SplitFlapText component
+(function(){
+  var mountEl=document.getElementById('flapTicker');
+  if(!mountEl) return;
+
+  var opts={
+    words:['USD · USDT · XAU · EUR · AED · AFG · IRR · IRT','LIVE RATES ACROSS BRANCHES','DAIKUNDI — TEHRAN NETWORK','TRUSTED SINCE DAY ONE','INTERNATIONAL CURRENCY SERVICES'],
+    flipDuration:0.12,
+    stagger:0.06,
+    cycleDelay:2400,
+    charset:'alphanumeric',
+    flipsPerChar:8,
+    loop:true
+  };
+
+  var CHARSETS={
+    alpha:'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    alphanumeric:'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+    numeric:'0123456789'
+  };
+  function resolveCharset(cs){ return CHARSETS[cs] || (typeof cs==='string' && cs.length>0 ? cs : CHARSETS.alphanumeric); }
+  function sampleChar(cs){ return cs.charAt(Math.floor(Math.random()*cs.length))||' '; }
+  function buildSequence(target,flips,cs){
+    var steps=[];
+    for(var i=0;i<flips;i++){ steps.push(sampleChar(cs)); }
+    steps.push(target);
+    return steps;
+  }
+
+  var reducedMotion=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)').matches:false;
+  var words=opts.words;
+
+  var tiles=[]; // {tileEl, topChar, bottomChar, current, flapFront, flapBack, seqTimer}
+
+  function makeTile(ch){
+    var tileEl=document.createElement('span'); tileEl.className='split-flap-text__tile'; tileEl.setAttribute('aria-hidden','true');
+
+    var halfTop=document.createElement('span'); halfTop.className='split-flap-text__half split-flap-text__half--top';
+    var topChar=document.createElement('span'); topChar.className='split-flap-text__char'; topChar.textContent=ch===' '?'\u00A0':ch;
+    halfTop.appendChild(topChar);
+
+    var halfBottom=document.createElement('span'); halfBottom.className='split-flap-text__half split-flap-text__half--bottom';
+    var bottomChar=document.createElement('span'); bottomChar.className='split-flap-text__char'; bottomChar.textContent=ch===' '?'\u00A0':ch;
+    halfBottom.appendChild(bottomChar);
+
+    tileEl.appendChild(halfTop); tileEl.appendChild(halfBottom);
+    return {tileEl:tileEl,topChar:topChar,bottomChar:bottomChar,current:ch,flapFront:null,flapBack:null,seqTimer:null};
+  }
+
+  // (re)build the tile row to exactly match a phrase's length — no padding, no empty trailing tiles
+  function rebuildRow(phrase, startChar){
+    tiles.forEach(function(t){ if(t.seqTimer) clearTimeout(t.seqTimer); });
+    mountEl.innerHTML='';
+    tiles=phrase.split('').map(function(ch){
+      var t=makeTile(startChar===undefined?ch:startChar);
+      mountEl.appendChild(t.tileEl);
+      return t;
+    });
+    mountEl.setAttribute('aria-label',phrase);
+  }
+
+  function setChar(el,ch){ el.textContent = ch===' ' ? '\u00A0' : ch; }
+
+  function flipTile(tile,fromChar,toChar,durationMs){
+    if(tile.flapFront){ tile.flapFront.remove(); tile.flapFront=null; }
+    if(tile.flapBack){ tile.flapBack.remove(); tile.flapBack=null; }
+
+    setChar(tile.bottomChar,toChar); // reveal target underneath, hidden until flap completes
+
+    var front=document.createElement('span'); front.className='split-flap-text__flap split-flap-text__flap--front';
+    var frontChar=document.createElement('span'); frontChar.className='split-flap-text__char'; setChar(frontChar,fromChar);
+    front.appendChild(frontChar);
+    front.style.animationDuration=durationMs+'ms';
+
+    var back=document.createElement('span'); back.className='split-flap-text__flap split-flap-text__flap--back';
+    var backChar=document.createElement('span'); backChar.className='split-flap-text__char'; setChar(backChar,toChar);
+    back.appendChild(backChar);
+    back.style.animationDuration=durationMs+'ms';
+
+    tile.tileEl.appendChild(front);
+    tile.tileEl.appendChild(back);
+    tile.flapFront=front; tile.flapBack=back;
+
+    setTimeout(function(){
+      if(tile.flapFront===front){ front.remove(); tile.flapFront=null; }
+      if(tile.flapBack===back){ back.remove(); tile.flapBack=null; }
+      setChar(tile.topChar,toChar);
+      tile.current=toChar;
+    }, durationMs);
+  }
+
+  function animateTileSequence(tile,targetChar,flips,cs,flipMs,startDelayMs){
+    var fromChar=tile.current;
+    if(fromChar===targetChar) return;
+    var sequence=buildSequence(targetChar,flips,cs);
+    if(tile.seqTimer) clearTimeout(tile.seqTimer);
+
+    function runStep(i,prevChar){
+      if(i>=sequence.length) return;
+      flipTile(tile,prevChar,sequence[i],flipMs);
+      tile.seqTimer=setTimeout(function(){ runStep(i+1,sequence[i]); }, flipMs);
+    }
+    tile.seqTimer=setTimeout(function(){ runStep(0,fromChar); }, startDelayMs);
+  }
+
+  function flipTo(word){
+    var flipMs=Math.max(40,(opts.flipDuration||0.12)*1000);
+    var staggerMs=Math.max(0,(opts.stagger||0)*1000);
+    var flips=Math.max(0,Math.floor(opts.flipsPerChar||0));
+    var cs=resolveCharset(opts.charset);
+
+    // rebuild the row sized exactly to the new phrase, starting blank, then flip every tile in
+    rebuildRow(word, ' ');
+
+    var maxDuration=0;
+    word.split('').forEach(function(ch,i){
+      var seqLen=flips+1;
+      var thisDuration=i*staggerMs+seqLen*flipMs;
+      if(thisDuration>maxDuration) maxDuration=thisDuration;
+      animateTileSequence(tiles[i],ch,flips,cs,flipMs,i*staggerMs);
+    });
+    return maxDuration;
+  }
+
+  if(reducedMotion || words.length===0) return;
+
+  rebuildRow(words[0]);
+
+  if(words.length<=1) return;
+
+  var idx=0;
+  function scheduleNext(delay){
+    setTimeout(function(){
+      var nextIndex=idx+1;
+      if(nextIndex>=words.length && !opts.loop) return;
+      idx=nextIndex%words.length;
+      var animDuration=flipTo(words[idx]);
+      scheduleNext(Math.max(400,opts.cycleDelay||2400)+animDuration);
+    }, delay);
+  }
+  scheduleNext(Math.max(400,opts.cycleDelay||2400));
 })();
 // particle brand-name effect (adapted, no pointer interaction)
 (function(){
@@ -993,100 +1268,77 @@ footer .amber{color:var(--amber)}
     var finCanvas=document.getElementById('heroFinCanvas');
     if(finCanvas) initFinBackground(finCanvas);
 
-    var el=document.getElementById('brandParticleEn');
-    if(el){
-      initParticleText(el,{
-        text:'NILI EXCHANGE',
-        particleSize:2.2,
-        density:4,
-        color:'#f8fafc',
-        highlightColor:'#8b5cf6',
-        scatter:250,
-        gatherDuration:1600,
-        stagger:840,
-        idleDrift:0.1,
-        trigger:'click',
-        fontSize:'clamp(3.5rem, 13vw, 9rem)',
-        fontWeight:800,
-        fontFamily:'inherit',
-        glow:true
-      });
-    }
-
-    // stroke-draw + wipe fill for Persian brand name (plays AFTER the English particle text settles)
-    initStrokeText({
-      strokeId:'strokeStrokeFa',
-      fillId:'strokeFillFa',
-      wipeRectId:'strokeWipeRectFa',
-      svgId:'strokeSvgFa',
-      strokeColor:'#A78BFA',
-      fillColor:'#F8FAFC',
-      strokeWidth:1.4,
-      drawDuration:1.6,
-      fillDelay:0.2,
-      ease:'power2.out',
-      fontSize:72,
-      startDelay: 2200 // ms — waits for the English particle-text to finish gathering first
+    // wordmark reveal — faithful port of StrokeText: per-character stroke draw (staggered) + wipe fill
+    initStrokeTextReal({
+      strokeId:'strokeOutlineEn', fillId:'strokeFillEn', wipeRectId:'wipeRectEn', svgId:'strokeSvgEn',
+      strokeColor:'#A78BFA', fillColor:'#F8FAFC', strokeWidth:1.4,
+      drawDuration:1.6, fillDelay:0.2, stagger:0.05, ease:'power2.out',
+      fontSize:56, reverse:false, startDelay:0
+    });
+    initStrokeTextReal({
+      strokeId:'strokeOutlineFa', fillId:'strokeFillFa', wipeRectId:'wipeRectFa', svgId:'strokeSvgFa',
+      strokeColor:'#A78BFA', fillColor:'#F8FAFC', strokeWidth:1.4,
+      drawDuration:1.6, fillDelay:0.2, stagger:0.05, ease:'power2.out',
+      fontSize:76, reverse:false, wipeFromRight:true, startDelay:2500 // starts right after the English wordmark finishes; both the draw stagger and the fill wipe run right-to-left
     });
   });
 
-  function initStrokeText(opts){
-    var strokeEl=document.getElementById(opts.strokeId);
-    var fillEl=document.getElementById(opts.fillId);
+  function initStrokeTextReal(opts){
+    var strokeText=document.getElementById(opts.strokeId);
+    var fillText=document.getElementById(opts.fillId);
     var wipeRect=document.getElementById(opts.wipeRectId);
     var svg=document.getElementById(opts.svgId);
-    if(!strokeEl||!fillEl||!wipeRect||!svg) return;
+    if(!strokeText||!fillText||!wipeRect||!svg) return;
+
+    var strokes=Array.prototype.slice.call(strokeText.querySelectorAll('[data-stroke-char]'));
+    var fills=Array.prototype.slice.call(fillText.querySelectorAll('[data-fill-char]'));
+    if(!strokes.length) return;
 
     var dash=Math.max(opts.fontSize*7,200);
     var fillDuration=Math.max(0.4,opts.drawDuration*0.5);
     var hasGsap=(typeof gsap!=='undefined');
+    var reducedMotion=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)').matches:false;
 
     function fixViewBox(){
       var bbox;
-      try{ bbox=strokeEl.getBBox(); }catch(e){ return null; }
+      try{ bbox=strokeText.getBBox(); }catch(e){ return null; }
       if(!bbox||!bbox.width) return null;
       var pad=Math.max(opts.strokeWidth||1, opts.fontSize*0.1);
       var box={x:bbox.x-pad,y:bbox.y-pad,width:bbox.width+pad*2,height:bbox.height+pad*2};
       svg.setAttribute('viewBox',box.x+' '+box.y+' '+box.width+' '+box.height);
-      wipeRect.setAttribute('x',box.x);
       wipeRect.setAttribute('y',box.y);
       wipeRect.setAttribute('height',box.height);
+      if(opts.wipeFromRight){ wipeRect.setAttribute('x',box.x+box.width); } else { wipeRect.setAttribute('x',box.x); }
       return box;
     }
 
     function showStatic(box){
-      // fallback: no animation library available — just show the finished text so it's never invisible
-      wipeRect.setAttribute('width',box?box.width:100000);
-      fillEl.style.opacity=1;
+      strokes.forEach(function(s){ s.style.strokeDasharray='none'; s.style.strokeDashoffset='0'; });
+      fills.forEach(function(f){ f.style.opacity=1; });
+      if(box){ wipeRect.setAttribute('x',box.x); wipeRect.setAttribute('width',box.width); }
+      else { wipeRect.setAttribute('width',100000); }
     }
 
-    function measureAndBuild(){
+    var ready=(document.fonts&&document.fonts.ready)?document.fonts.ready:Promise.resolve();
+    ready.then(function(){
       var box=fixViewBox();
-      if(!box) return null;
+      if(!box||!hasGsap||reducedMotion){ showStatic(box); return; }
+
+      gsap.set(strokes,{strokeDasharray:dash, strokeDashoffset:dash});
+      gsap.set(fills,{opacity:1});
       wipeRect.setAttribute('width',0);
 
-      gsap.set(strokeEl,{strokeDasharray:dash,strokeDashoffset:dash});
-      gsap.set(fillEl,{opacity:1});
+      var staggerConfig = opts.reverse ? {each:opts.stagger, from:'end'} : opts.stagger;
 
-      var tl=gsap.timeline({paused:true});
-      tl.to(strokeEl,{strokeDashoffset:0,duration:opts.drawDuration,ease:opts.ease},0);
-      tl.to(wipeRect,{attr:{width:box.width},duration:fillDuration,ease:'power2.inOut'},opts.drawDuration+opts.fillDelay);
-      return tl;
-    }
-
-    var reducedMotion=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)').matches:false;
-    var ready=(document.fonts&&document.fonts.ready)?document.fonts.ready:Promise.resolve();
-
-    ready.then(function(){
-      if(!hasGsap){
-        var box=fixViewBox();
-        showStatic(box);
-        return;
-      }
-      var tl=measureAndBuild();
-      if(!tl){ showStatic(null); return; }
-      if(reducedMotion){ tl.progress(1); return; }
-      setTimeout(function(){ tl.play(0); }, opts.startDelay||0);
+      setTimeout(function(){
+        var tl=gsap.timeline();
+        tl.to(strokes,{strokeDashoffset:0,duration:opts.drawDuration,ease:opts.ease,stagger:staggerConfig},0);
+        if(opts.wipeFromRight){
+          tl.to(wipeRect,{attr:{x:box.x, width:box.width},duration:fillDuration,ease:'power2.inOut'},opts.drawDuration+opts.fillDelay);
+        } else {
+          tl.to(wipeRect,{attr:{width:box.width},duration:fillDuration,ease:'power2.inOut'},opts.drawDuration+opts.fillDelay);
+        }
+      }, opts.startDelay||0);
     }).catch(function(){ showStatic(fixViewBox()); });
   }
 })();
