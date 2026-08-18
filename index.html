@@ -10,9 +10,9 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --ink:#0A140F;
-  --ink-2:#0F1F17;
-  --panel:#17271E;
+  --ink:#0B0E13;
+  --ink-2:#10141B;
+  --panel:#171C24;
   --line:rgba(243,239,228,0.11);
   --paper:#F2EEE2;
   --paper-2:#E9E3D2;
@@ -20,17 +20,17 @@
   --amber:#3FCB7E;
   --amber-dim:#1F8F57;
   --teal:#31D6B4;
-  --violet:#7C8CF8;
-  --muted:#939C90;
+  --violet:#A855F7;
+  --muted:#93999E;
   --muted-2:#6B6458;
 }
 html{scroll-behavior:smooth}
 body{
   font-family:'Vazirmatn',sans-serif;
   background:
-    radial-gradient(ellipse 60% 40% at 12% 0%,rgba(63,203,126,.07),transparent 60%),
-    radial-gradient(ellipse 50% 35% at 92% 25%,rgba(124,140,248,.06),transparent 60%),
-    radial-gradient(ellipse 45% 35% at 15% 95%,rgba(49,214,180,.06),transparent 60%),
+    radial-gradient(ellipse 55% 40% at 90% 4%,rgba(168,85,247,.10),transparent 60%),
+    radial-gradient(ellipse 50% 35% at 8% 20%,rgba(63,203,126,.045),transparent 60%),
+    radial-gradient(ellipse 45% 35% at 20% 95%,rgba(49,214,180,.045),transparent 60%),
     var(--ink);
   color:var(--paper);
   overflow-x:hidden;
@@ -79,13 +79,13 @@ nav{
   position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;
   padding:9rem 0 3rem;overflow:hidden;
   background:
-    radial-gradient(ellipse 60% 50% at 80% 0%,rgba(63,203,126,0.10),transparent 60%),
-    radial-gradient(ellipse 50% 40% at 10% 100%,rgba(49,214,180,0.08),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 0%,rgba(63,203,126,0.07),transparent 60%),
+    radial-gradient(ellipse 50% 40% at 10% 100%,rgba(49,214,180,0.06),transparent 60%),
     var(--ink);
 }
 .hero-glow{position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
-    radial-gradient(ellipse 55% 45% at 50% 15%,rgba(106,127,242,0.16),transparent 65%),
+    radial-gradient(ellipse 55% 45% at 50% 15%,rgba(168,85,247,0.16),transparent 65%),
     radial-gradient(ellipse 45% 35% at 20% 85%,rgba(91,232,255,0.08),transparent 70%),
     radial-gradient(ellipse 45% 35% at 80% 80%,rgba(63,203,126,0.06),transparent 70%);
 }
@@ -283,8 +283,8 @@ nav{
 .sec-head p{color:var(--muted);margin-top:.8rem;max-width:520px;line-height:1.9;font-size:.96rem}
 .dark-sec .sec-head p{color:var(--muted)}
 .section-alt{background:
-  radial-gradient(ellipse 55% 40% at 88% 8%,rgba(49,214,180,.06),transparent 60%),
-  radial-gradient(ellipse 45% 35% at 8% 92%,rgba(63,203,126,.055),transparent 60%),
+  radial-gradient(ellipse 55% 40% at 85% 8%,rgba(168,85,247,.085),transparent 60%),
+  radial-gradient(ellipse 45% 35% at 8% 92%,rgba(63,203,126,.04),transparent 60%),
   var(--ink-2)}
 
 /* ---------- SERVICES: boarding pass ---------- */
@@ -326,9 +326,9 @@ nav{
   letter-spacing:1.5px;color:var(--muted-2);
 }
 .board-row{border-top:1px solid var(--line);
-  opacity:0;transform:rotateX(-90deg);transform-origin:top;transition:transform .55s cubic-bezier(.4,0,.2,1),opacity .4s;
+  opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;
 }
-.board-row.in-view{opacity:1;transform:rotateX(0)}
+.board-row.in-view{opacity:1;transform:translateY(0)}
 .board-gate{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-weight:600;font-size:.85rem}
 .board-dest{font-weight:600;font-size:.98rem}
 .board-dest small{display:block;color:var(--muted);font-weight:400;font-size:.78rem;margin-top:2px}
@@ -436,7 +436,7 @@ footer .amber{color:var(--amber)}
             <rect id="wipeRectEn" x="0" y="-75" width="0" height="95"></rect>
           </clipPath>
         </defs>
-        <text id="strokeOutlineEn" xml:space="preserve" x="0" y="0" fill="none" stroke="#A78BFA" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" style="font-size:56px;font-weight:800;letter-spacing:-1px;font-family:'Unbounded',sans-serif"><tspan data-stroke-char>N</tspan><tspan data-stroke-char>I</tspan><tspan data-stroke-char>L</tspan><tspan data-stroke-char>I</tspan><tspan data-stroke-char> </tspan><tspan data-stroke-char>E</tspan><tspan data-stroke-char>X</tspan><tspan data-stroke-char>C</tspan><tspan data-stroke-char>H</tspan><tspan data-stroke-char>A</tspan><tspan data-stroke-char>N</tspan><tspan data-stroke-char>G</tspan><tspan data-stroke-char>E</tspan></text>
+        <text id="strokeOutlineEn" xml:space="preserve" x="0" y="0" fill="none" stroke="#B24CF0" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" style="font-size:56px;font-weight:800;letter-spacing:-1px;font-family:'Unbounded',sans-serif"><tspan data-stroke-char>N</tspan><tspan data-stroke-char>I</tspan><tspan data-stroke-char>L</tspan><tspan data-stroke-char>I</tspan><tspan data-stroke-char> </tspan><tspan data-stroke-char>E</tspan><tspan data-stroke-char>X</tspan><tspan data-stroke-char>C</tspan><tspan data-stroke-char>H</tspan><tspan data-stroke-char>A</tspan><tspan data-stroke-char>N</tspan><tspan data-stroke-char>G</tspan><tspan data-stroke-char>E</tspan></text>
         <text id="strokeFillEn" xml:space="preserve" x="0" y="0" fill="#F8FAFC" stroke="none" style="font-size:56px;font-weight:800;letter-spacing:-1px;font-family:'Unbounded',sans-serif" clip-path="url(#wipeClipEn)"><tspan data-fill-char>N</tspan><tspan data-fill-char>I</tspan><tspan data-fill-char>L</tspan><tspan data-fill-char>I</tspan><tspan data-fill-char> </tspan><tspan data-fill-char>E</tspan><tspan data-fill-char>X</tspan><tspan data-fill-char>C</tspan><tspan data-fill-char>H</tspan><tspan data-fill-char>A</tspan><tspan data-fill-char>N</tspan><tspan data-fill-char>G</tspan><tspan data-fill-char>E</tspan></text>
       </svg>
     </div>
@@ -447,7 +447,7 @@ footer .amber{color:var(--amber)}
             <rect id="wipeRectFa" x="0" y="-100" width="0" height="130"></rect>
           </clipPath>
         </defs>
-        <text id="strokeOutlineFa" xml:space="preserve" x="0" y="0" fill="none" stroke="#A78BFA" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" style="font-size:76px;font-weight:400;font-family:'Lalezar',serif"><tspan data-stroke-char>ص</tspan><tspan data-stroke-char>ر</tspan><tspan data-stroke-char>ا</tspan><tspan data-stroke-char>ف</tspan><tspan data-stroke-char>ی</tspan><tspan data-stroke-char> </tspan><tspan data-stroke-char>ن</tspan><tspan data-stroke-char>ی</tspan><tspan data-stroke-char>ل</tspan><tspan data-stroke-char>ی</tspan></text>
+        <text id="strokeOutlineFa" xml:space="preserve" x="0" y="0" fill="none" stroke="#B24CF0" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" style="font-size:76px;font-weight:400;font-family:'Lalezar',serif"><tspan data-stroke-char>ص</tspan><tspan data-stroke-char>ر</tspan><tspan data-stroke-char>ا</tspan><tspan data-stroke-char>ف</tspan><tspan data-stroke-char>ی</tspan><tspan data-stroke-char> </tspan><tspan data-stroke-char>ن</tspan><tspan data-stroke-char>ی</tspan><tspan data-stroke-char>ل</tspan><tspan data-stroke-char>ی</tspan></text>
         <text id="strokeFillFa" xml:space="preserve" x="0" y="0" fill="#F8FAFC" stroke="none" style="font-size:76px;font-weight:400;font-family:'Lalezar',serif" clip-path="url(#wipeClipFa)"><tspan data-fill-char>ص</tspan><tspan data-fill-char>ر</tspan><tspan data-fill-char>ا</tspan><tspan data-fill-char>ف</tspan><tspan data-fill-char>ی</tspan><tspan data-fill-char> </tspan><tspan data-fill-char>ن</tspan><tspan data-fill-char>ی</tspan><tspan data-fill-char>ل</tspan><tspan data-fill-char>ی</tspan></text>
       </svg>
     </div>
@@ -565,13 +565,13 @@ footer .amber{color:var(--amber)}
       </div>
       <div class="board-row reveal-row">
         <span class="board-gate">01</span>
-        <span class="board-dest">شعبه دایکندی — شهر نیلی<small>شعبه مرکزی و اصلی — افغانستان 🇦🇫</small></span>
+        <span class="board-dest">شعبه دایکندی — شهر نیلی<small>شعبه مرکزی و اصلی — افغانستان</small></span>
         <span class="board-code">AFN</span>
         <span class="board-status"><span class="dot"></span>فعال</span>
       </div>
       <div class="board-row reveal-row">
         <span class="board-gate">02</span>
-        <span class="board-dest">شعبه تهران<small>خدمات کامل ارزی و حواله — ایران 🇮🇷</small></span>
+        <span class="board-dest">شعبه تهران<small>خدمات کامل ارزی و حواله — ایران</small></span>
         <span class="board-code">IRR</span>
         <span class="board-status"><span class="dot"></span>فعال</span>
       </div>
@@ -1471,15 +1471,15 @@ footer .amber{color:var(--amber)}
     // wordmark reveal — faithful port of StrokeText: per-character stroke draw (staggered) + wipe fill
     initStrokeTextReal({
       strokeId:'strokeOutlineEn', fillId:'strokeFillEn', wipeRectId:'wipeRectEn', svgId:'strokeSvgEn',
-      strokeColor:'#A78BFA', fillColor:'#F8FAFC', strokeWidth:1.4,
+      strokeColor:'#B24CF0', fillColor:'#F8FAFC', strokeWidth:1.4,
       drawDuration:1.6, fillDelay:0.2, stagger:0.05, ease:'power2.out',
       fontSize:56, reverse:false, startDelay:0
     });
     initStrokeTextReal({
       strokeId:'strokeOutlineFa', fillId:'strokeFillFa', wipeRectId:'wipeRectFa', svgId:'strokeSvgFa',
-      strokeColor:'#A78BFA', fillColor:'#F8FAFC', strokeWidth:1.4,
+      strokeColor:'#B24CF0', fillColor:'#F8FAFC', strokeWidth:1.4,
       drawDuration:1.6, fillDelay:0.2, stagger:0.05, ease:'power2.out',
-      fontSize:76, reverse:false, wipeFromRight:true, startDelay:2500 // starts right after the English wordmark finishes; both the draw stagger and the fill wipe run right-to-left
+      fontSize:76, reverse:false, wipeFromRight:true, startDelay:0 // now runs in perfect sync with the English wordmark
     });
   });
 
